@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perros de la Isla · Adiestramiento canino en Mallorca</title>
+<meta name="description" content="Adiestramiento canino en Mallorca que mejora la comunicación entre tu perro y tú. Metodología cognitivo-emocional. Tu perro merece ser feliz hoy.">
+<style>/* =========================================================
+   PERROS DE LA ISLA — Landing
+   Paleta:  rojo #C8102E · oliva #6B7A3A · negro #1A1A1A · crema #F5EFE0
+   Tipos:   Bebas Neue (display) · Inter (cuerpo)
+   ========================================================= */
+
+/* ---------- Fuentes (self-hosted) ---------- */
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url("BebasNeue.ttf") format('truetype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url("Inter.ttf") format('truetype-variations');
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  --rojo:   #C8102E;
+  --rojo-h: #a93226;   /* hover */
+  --rojo-l: #ff8060;   /* link sobre oscuro */
+  --oliva:  #6B7A3A;
+  --oliva-l:#9CB64B;
+  --negro:  #1A1A1A;
+  --crema:  #F5EFE0;
+  --crema-2:#EFE7D6;   /* fondo de sección alterno */
+  --placeholder-bg: #EAE1CD;
+  --placeholder-bd: #D8CDB4;
+  --texto:  #1A1A1A;
+  --texto-2:#3d3833;
+  --texto-3:#5A534C;
+  --display: 'Bebas Neue', sans-serif;
+  --body: 'Inter', system-ui, -apple-system, sans-serif;
+  --maxw: 1200px;
+  --pad-x: clamp(20px, 5vw, 64px);
+}
+
+/* ---------- Reset / base ---------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  color: var(--texto);
+  background: var(--crema);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+::selection { background: var(--rojo); color: var(--crema); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--rojo); outline-offset: 3px; border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* ---------- Utilidades ---------- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-left: var(--pad-x); padding-right: var(--pad-x); }
+.display { font-family: var(--display); font-weight: 400; letter-spacing: 1px; }
+.eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--rojo); margin-bottom: 22px;
+}
+.eyebrow .bar { width: 30px; height: 2px; background: var(--rojo); display: block; flex: none; }
+.eyebrow.on-dark { color: var(--crema); }
+
+/* CTA primario */
+.btn {
+  display: inline-block; background: var(--rojo); color: var(--crema);
+  font-weight: 600; font-size: 16px; padding: 17px 30px; border: none;
+  border-radius: 11px; text-decoration: none; cursor: pointer;
+  box-shadow: 0 6px 18px rgba(200,16,46,.26);
+  transition: transform .12s ease, background .15s ease;
+}
+.btn:hover { background: var(--rojo-h); }
+.btn:active { transform: scale(.97); }
+.btn--lg { font-size: 17px; padding: 18px 36px; box-shadow: 0 6px 22px rgba(200,16,46,.4); }
+.btn--sm { font-size: 14px; padding: 12px 22px; box-shadow: 0 4px 14px rgba(200,16,46,.22); }
+
+.link-underline {
+  font-weight: 600; font-size: 15px; text-decoration: none;
+  border-bottom: 2px solid rgba(26,26,26,.18); padding-bottom: 3px;
+  transition: border-color .15s ease;
+}
+.link-underline:hover { border-color: var(--rojo); }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(245,239,224,.82);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(26,26,26,.10);
+}
+.site-header .wrap {
+  padding-top: 14px; padding-bottom: 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand img { width: 54px; height: 54px; }
+.brand span { font-family: var(--display); font-size: 28px; letter-spacing: 1.5px; line-height: 1; }
+
+/* ---------- Separador con isla ---------- */
+.island-sep {
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad-x);
+}
+.island-sep .rule { height: 1px; flex: 1; background: rgba(26,26,26,.13); }
+.island-sep svg { display: block; flex: none; }
+
+/* Marca de agua de la isla */
+.island-watermark { position: absolute; pointer-events: none; }
+
+/* ---------- Hero (común) ---------- */
+.hero { display: none; }
+.hero.is-active { display: block; }
+
+/* Hero A — editorial */
+.heroA .wrap { padding-top: clamp(48px,7vw,96px); padding-bottom: clamp(56px,7vw,104px); }
+.heroA .grid { display: flex; flex-wrap: wrap; gap: clamp(36px,5vw,72px); align-items: center; }
+.heroA .col { flex: 1 1 380px; min-width: 300px; }
+.heroA h1 { font-size: clamp(52px,8.5vw,108px); line-height: .9; margin: 0; text-wrap: balance; }
+.heroA p.lead { font-size: clamp(16px,1.4vw,19px); line-height: 1.6; color: var(--texto-3); max-width: 460px; margin: 26px 0 0; }
+.heroA .actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 36px; }
+.heroA .media { align-self: stretch; }
+
+/* Hero B — foto a sangrado */
+.heroB {
+  position: relative; min-height: clamp(560px,86vh,860px);
+  background: #15140F url(hero.jpg) center/cover no-repeat; display: flex; align-items: flex-end; overflow: hidden;
+}
+.heroB .overlay-1 { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,.35) 0%, rgba(10,10,10,.62) 55%, rgba(10,10,10,.92) 100%); }
+.heroB .overlay-2 { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(197,48,48,.12), transparent 50%, rgba(107,122,58,.10)); }
+.heroB .content { position: relative; z-index: 4; max-width: var(--maxw); width: 100%; margin: 0 auto; padding: 0 var(--pad-x) clamp(48px,7vw,88px); }
+.heroB h1 { font-size: clamp(56px,10vw,140px); line-height: .88; margin: 0; color: var(--crema); text-wrap: balance; }
+.heroB p.lead { font-size: clamp(16px,1.5vw,20px); line-height: 1.6; color: rgba(245,239,224,.82); max-width: 520px; margin: 24px 0 0; }
+.heroB .btn { margin-top: 34px; }
+.heroB .ph-tag { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 3; }
+.heroB .island-watermark { top: 50%; left: 50%; transform: translate(-50%,-54%); opacity: .06; }
+
+/* Hero C — tipográfico */
+.heroC { position: relative; max-width: 1280px; margin: 0 auto; padding: clamp(40px,6vw,88px) var(--pad-x) clamp(48px,6vw,96px); overflow: hidden; }
+.heroC .island-watermark { top: -40px; right: -160px; opacity: .05; }
+.heroC h1 { position: relative; font-size: clamp(60px,15vw,210px); line-height: .82; margin: 0; }
+.heroC .row { position: relative; display: flex; flex-wrap: wrap; gap: 36px; align-items: flex-end; justify-content: space-between; margin-top: clamp(28px,4vw,52px); }
+.heroC .row p { font-size: clamp(16px,1.4vw,19px); line-height: 1.6; color: var(--texto-3); max-width: 480px; margin: 0; }
+.heroC .row .btn { margin-top: 28px; }
+.heroC .media { flex: 0 1 300px; min-width: 240px; height: clamp(260px,30vw,360px); }
+
+.accent { color: var(--rojo); }
+
+/* ---------- Placeholder de foto ---------- */
+.photo-ph {
+  position: relative; width: 100%; height: 100%;
+  background: var(--placeholder-bg); border: 1px solid var(--placeholder-bd);
+  border-radius: 16px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.heroA .photo-ph { min-height: clamp(380px,52vh,540px); }
+.photo-ph .label { text-align: center; position: relative; }
+.photo-ph .label b { display: block; font-family: var(--display); font-size: 26px; letter-spacing: 1.5px; color: #B3A78C; font-weight: 400; }
+.photo-ph .label small { display: block; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-top: 6px; color: #A99D83; }
+.photo-ph .tag {
+  position: absolute; top: 14px; left: 14px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: #B3A78C; border: 1px solid var(--placeholder-bd); padding: 4px 9px; border-radius: 999px;
+}
+.ph-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(245,239,224,.5); border: 1px solid rgba(245,239,224,.2);
+  padding: 5px 11px; border-radius: 999px;
+}
+
+/* ---------- Secciones genéricas ---------- */
+section { scroll-margin-top: 90px; }
+.section-pad { padding-top: clamp(72px,10vw,128px); padding-bottom: clamp(72px,10vw,128px); }
+h2.display { font-size: clamp(36px,5vw,64px); line-height: .96; letter-spacing: .5px; margin: 0; }
+.section-intro { max-width: 680px; }
+.section-intro p { font-size: clamp(16px,1.3vw,18px); line-height: 1.7; color: var(--texto-2); margin: 22px 0 0; }
+
+/* Reveal al hacer scroll */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .85s cubic-bezier(.22,.61,.36,1), transform .85s cubic-bezier(.22,.61,.36,1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* ---------- 2 · Enfoque ---------- */
+.enfoque .grid { display: flex; flex-wrap: wrap; gap: clamp(36px,5vw,80px); align-items: center; }
+.enfoque .col-text { flex: 1 1 320px; min-width: 300px; order: 2; }
+.enfoque .col-media { flex: 1 1 320px; min-width: 300px; order: 1; }
+.enfoque h2 { font-size: clamp(36px,5vw,64px); line-height: .96; }
+.enfoque p { font-size: clamp(16px,1.3vw,18px); line-height: 1.7; color: var(--texto-2); margin: 26px 0 0; }
+.enfoque p + p { margin-top: 18px; }
+.enfoque strong { font-weight: 600; color: var(--negro); }
+.enfoque .photo-ph { height: clamp(320px,42vw,460px); }
+
+/* ---------- 3 · Casos ---------- */
+.casos { background: var(--crema-2); border-top: 1px solid rgba(26,26,26,.08); border-bottom: 1px solid rgba(26,26,26,.08); }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 18px; margin-top: clamp(40px,5vw,60px); }
+.case-card {
+  background: var(--crema); border: 1px solid #E1D7C0; border-radius: 14px; padding: 28px 26px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.case-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(26,26,26,.08); }
+.case-card .num { font-family: var(--display); font-size: 22px; color: var(--rojo); letter-spacing: 1px; }
+.case-card h3 { font-family: var(--display); font-weight: 400; font-size: 26px; letter-spacing: .5px; margin: 8px 0 12px; }
+.case-card p { font-size: 15px; line-height: 1.65; color: var(--texto-3); margin: 0; }
+
+/* ---------- 4 · Cómo empezar ---------- */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); margin-top: clamp(44px,5vw,64px); border-top: 1px solid rgba(26,26,26,.13); }
+.step { padding: 30px 28px; }
+.step:not(:last-child) { border-right: 1px solid rgba(26,26,26,.10); }
+.step:first-child { padding-left: 0; }
+.step:last-child { padding-right: 0; }
+.step .num { font-family: var(--display); font-size: 44px; color: var(--rojo); line-height: 1; }
+.step h3 { font-family: var(--display); font-weight: 400; font-size: 24px; letter-spacing: .5px; margin: 10px 0 8px; }
+.step p { font-size: 15px; line-height: 1.6; color: var(--texto-3); margin: 0; }
+.empezar .cta-row { margin-top: clamp(36px,4vw,52px); }
+
+/* ---------- 5 · Ecosistema (oscuro) ---------- */
+.eco { background: var(--negro); color: var(--crema); }
+.eco h2 { font-size: clamp(36px,5.5vw,72px); line-height: .94; color: var(--crema); }
+.eco .section-intro p { color: rgba(245,239,224,.7); }
+.eco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px,1fr)); gap: 20px; margin-top: clamp(44px,5vw,64px); }
+.eco-card {
+  background: #222; border: 1px solid #2A2A2A; border-radius: 16px; padding: 20px;
+  display: flex; flex-direction: column; transition: transform .18s ease, border-color .18s ease;
+}
+.eco-card:hover { transform: translateY(-4px); border-color: #3a3a3a; }
+.eco-card h3 { font-family: var(--display); font-weight: 400; font-size: 27px; letter-spacing: .5px; margin: 18px 0 8px; color: var(--crema); }
+.eco-card p { font-size: 14px; line-height: 1.6; color: rgba(245,239,224,.66); margin: 0 0 16px; flex: 1; }
+.eco-link { font-size: 14px; font-weight: 600; color: var(--rojo-l); text-decoration: none; border-bottom: 1px solid rgba(255,128,96,.35); padding-bottom: 2px; align-self: flex-start; transition: border-color .15s ease; }
+.eco-link:hover { border-color: var(--rojo-l); }
+.eco-preview { position: relative; background: #111; border: 1px solid #2A2A2A; border-radius: 12px; height: 178px; overflow: hidden; }
+.eco-preview--pad { padding: 16px; display: flex; flex-direction: column; }
+
+/* preview Victoria */
+.chat { justify-content: flex-end; gap: 8px; }
+.chat .status { display: flex; align-items: center; gap: 7px; margin-bottom: auto; }
+.chat .dot { width: 8px; height: 8px; border-radius: 999px; background: #27AE60; display: block; }
+.chat .status span { font-size: 11px; font-weight: 600; color: rgba(245,239,224,.6); letter-spacing: .3px; }
+.bubble { font-size: 12.5px; line-height: 1.45; padding: 9px 12px; max-width: 82%; }
+.bubble--in { align-self: flex-start; background: #2A2A2A; color: var(--crema); border-radius: 13px 13px 13px 4px; }
+.bubble--out { align-self: flex-end; max-width: 70%; background: var(--rojo); color: var(--crema); border-radius: 13px 13px 4px 13px; }
+
+/* preview Paseos */
+.map-bg { position: absolute; inset: 0; background: radial-gradient(circle at 30% 35%, #1d231a, #111 70%); }
+.map-pin { position: absolute; border-radius: 999px; }
+.map-badge { position: absolute; left: 14px; bottom: 14px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--crema); background: rgba(200,16,46,.9); padding: 4px 9px; border-radius: 999px; }
+
+/* preview isla */
+.isla { align-items: center; justify-content: center; gap: 18px; flex-direction: row !important; }
+.isla .score { font-family: var(--display); font-size: 46px; line-height: .9; color: var(--crema); }
+.isla .score-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--oliva); }
+.isla .meter { width: 96px; height: 5px; border-radius: 999px; background: #2A2A2A; margin-top: 8px; overflow: hidden; }
+.isla .meter > span { display: block; height: 100%; background: var(--oliva); }
+
+/* preview app tutores */
+.tasks { justify-content: center; gap: 11px; }
+.task { display: flex; align-items: center; gap: 10px; }
+.checkbox { width: 18px; height: 18px; border-radius: 6px; border: 2px solid var(--oliva); background: var(--oliva); flex: none; position: relative; }
+.checkbox::after { content: ''; position: absolute; left: 4px; top: 1px; width: 5px; height: 9px; border: solid #111; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.checkbox.off { border-color: #3a3a3a; background: transparent; }
+.checkbox.off::after { display: none; }
+.task .line { flex: 1; height: 9px; border-radius: 999px; background: #2A2A2A; }
+.task .line.faint { background: #1f1f1f; }
+.progress { margin-top: 6px; width: 100%; height: 6px; border-radius: 999px; background: #2A2A2A; overflow: hidden; }
+.progress > span { display: block; height: 100%; background: var(--oliva); }
+.progress-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--oliva); }
+
+/* ---------- 6 · Confianza ---------- */
+.confianza .eyebrow { justify-content: center; margin-bottom: 40px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); border-top: 1px solid rgba(26,26,26,.13); border-bottom: 1px solid rgba(26,26,26,.13); }
+.stat { padding: clamp(32px,4vw,48px) 28px; text-align: center; }
+.stat:not(:last-child) { border-right: 1px solid rgba(26,26,26,.10); }
+.stat .big { font-family: var(--display); font-size: clamp(56px,7vw,84px); line-height: .9; }
+.stat .big.rojo { color: var(--rojo); font-size: clamp(30px,3.4vw,42px); line-height: 1; letter-spacing: .5px; }
+.stat small { display: block; font-size: 15px; font-weight: 500; color: var(--texto-3); margin-top: 10px; }
+.stat .big.rojo + small { margin-top: 14px; }
+
+/* ---------- 7 · Contacto / cierre (oscuro) ---------- */
+.contacto { background: var(--negro); color: var(--crema); position: relative; overflow: hidden; }
+.contacto .island-watermark { bottom: -120px; right: -120px; opacity: .045; }
+.contacto .inner { position: relative; max-width: var(--maxw); margin: 0 auto; padding: clamp(80px,11vw,144px) var(--pad-x) clamp(48px,6vw,72px); }
+.contacto h2 { font-family: var(--display); font-weight: 400; font-size: clamp(48px,8vw,112px); line-height: .88; letter-spacing: 1px; margin: 0; color: var(--crema); }
+.contacto .lead { font-size: clamp(16px,1.4vw,19px); line-height: 1.65; color: rgba(245,239,224,.78); margin: 24px 0 0; max-width: 520px; }
+.contacto .btn { margin-top: 32px; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 28px; margin-top: clamp(56px,7vw,88px); padding-top: 44px; border-top: 1px solid rgba(245,239,224,.12); }
+.contact-grid h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--rojo); margin: 0 0 12px; }
+.contact-grid .phone { font-family: var(--display); font-size: 30px; letter-spacing: 1px; color: var(--crema); text-decoration: none; transition: color .15s ease; }
+.contact-grid .phone:hover { color: var(--rojo-l); }
+.contact-grid .wa { display: block; margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--oliva); text-decoration: none; transition: color .15s ease; }
+.contact-grid .wa:hover { color: var(--oliva-l); }
+.contact-grid .body { font-size: 15px; line-height: 1.7; color: rgba(245,239,224,.82); }
+.contact-grid a.social { display: block; font-size: 15px; font-weight: 500; color: rgba(245,239,224,.82); text-decoration: none; transition: color .15s ease; }
+.contact-grid a.social + a.social { margin-top: 8px; }
+.contact-grid a.social:hover { color: var(--rojo-l); }
+.site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; margin-top: clamp(48px,6vw,72px); padding-top: 32px; border-top: 1px solid rgba(245,239,224,.12); }
+.site-footer .fbrand { display: flex; align-items: center; gap: 14px; }
+.site-footer .fbrand b { display: block; font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: 1.5px; color: var(--crema); line-height: 1; }
+.site-footer .fbrand small { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(245,239,224,.5); margin-top: 3px; }
+.site-footer .sign { font-size: 13px; color: rgba(245,239,224,.55); }
+
+/* ---------- Selector de hero (sólo para revisión — borrar al elegir) ---------- */
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .step:not(:last-child) { border-right: none; border-bottom: 1px solid rgba(26,26,26,.10); }
+  .step { padding-left: 0; padding-right: 0; }
+  .stat:not(:last-child) { border-right: none; border-bottom: 1px solid rgba(26,26,26,.10); }
+}
+@media (max-width: 820px) {
+  .heroB { background-image: url(hero_mobile.jpg); background-position: center; }
+}
+</style>
+
+</head>
+<body>
+
+
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="img_0.png" alt="Perros de la Isla" width="54" height="54">
+      <span>Perros de la Isla</span>
+    </a>
+    <a class="btn btn--sm" href="https://wa.me/34622922173" target="_blank" rel="noopener">Habla con nosotros</a>
+  </div>
+</header>
+
+<span id="top"></span>
+
+<!-- ============ HERO B — FOTO A SANGRADO ============ -->
+<section class="hero heroB is-active" data-hero="B">
+  <!-- REEMPLAZAR el fondo #15140F por una foto documental a sangrado (background-image) -->
+  <svg class="island-watermark" viewBox="0 0 114 72" width="620" height="392" aria-hidden="true"><path d="M12,50C10,44 16,40 22,36C30,30 40,24 50,20L58,16C62,13 68,9 73,9C76,9 77,12 74,15C71,18 67,20 64,22C68,23 72,21 77,20C82,19 88,22 94,28C100,33 104,38 102,44C100,50 92,55 84,58C72,63 58,65 46,63C34,61 24,60 18,56C14,53 13,52 12,50Z" fill="#F5EFE0"></path></svg>
+  <div class="overlay-1"></div>
+  <div class="overlay-2"></div>
+  <div class="content">
+    <p class="eyebrow on-dark"><span class="bar"></span>Adiestramiento canino · Mallorca</p>
+    <h1 class="display">Tu perro merece<br>ser feliz <span class="accent">hoy</span></h1>
+    <p class="lead">Adiestramiento que mejora la comunicación entre tu perro y tú — para una convivencia más tranquila, aquí en Mallorca.</p>
+    <a class="btn" href="https://wa.me/34622922173" target="_blank" rel="noopener">Habla con nosotros</a>
+  </div>
+</section>
+
+<!-- ============ SEPARADOR ISLA ============ -->
+<div class="island-sep">
+  <span class="rule"></span>
+  <svg viewBox="0 0 114 72" width="30" height="19" aria-hidden="true"><path d="M12,50C10,44 16,40 22,36C30,30 40,24 50,20L58,16C62,13 68,9 73,9C76,9 77,12 74,15C71,18 67,20 64,22C68,23 72,21 77,20C82,19 88,22 94,28C100,33 104,38 102,44C100,50 92,55 84,58C72,63 58,65 46,63C34,61 24,60 18,56C14,53 13,52 12,50Z" fill="#C8102E"></path></svg>
+  <span class="rule"></span>
+</div>
+
+<!-- ============ 2 · EL ENFOQUE ============ -->
+<section class="enfoque" id="enfoque">
+  <div class="wrap section-pad reveal">
+    <div class="grid">
+      <div class="col-media">
+        <div class="photo-ph" style="border:none">
+          <img src="enfoque.jpg" alt="El adiestrador de Perros de la Isla con un perro en Mallorca" style="width:100%;height:100%;object-fit:cover;display:block">
+        </div>
+      </div>
+      <div class="col-text">
+        <p class="eyebrow"><span class="bar"></span>El enfoque</p>
+        <h2 class="display">Todo empieza<br>por entenderos</h2>
+        <p>La convivencia mejora cuando tu perro y tú os comunicáis de verdad. No se trata de que tu perro obedezca por sumisión, sino de que comprenda lo que le pides y se sienta entendido.</p>
+        <p>Cuando esa comunicación funciona, el perro vive más tranquilo y la vida juntos se vuelve más fácil. Trabajamos con una <strong>metodología cognitivo-emocional</strong>: tratamos a tu perro como un ser que piensa, siente y aprende.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · EN QUÉ ACOMPAÑAMOS ============ -->
+<section class="casos" id="casos">
+  <div class="wrap section-pad reveal">
+    <div class="section-intro">
+      <p class="eyebrow"><span class="bar"></span>En qué acompañamos</p>
+      <h2 class="display">Cada caso es distinto</h2>
+      <p>Estos son algunos de los caminos en los que te acompañamos. Empezamos siempre por conocer a tu perro, sin dar nada por hecho.</p>
+    </div>
+    <div class="cards">
+      <article class="case-card">
+          <div class="num">01</div>
+          <h3>Educación básica</h3>
+          <p>Los apoyos del día a día para una convivencia tranquila: paseos, llamadas, encuentros. Comunicación clara y sin tensión.</p>
+        </article>
+        <article class="case-card">
+          <div class="num">02</div>
+          <h3>Educación de cachorros</h3>
+          <p>Las primeras semanas marcan mucho. Os ayudamos a empezar con buen pie: hábitos, descanso y confianza desde el primer día.</p>
+        </article>
+        <article class="case-card">
+          <div class="num">03</div>
+          <h3>Ansiedad por separación</h3>
+          <p>Hay perros que lo pasan mal cuando se quedan solos. Trabajamos para que la soledad deje de ser un problema y para que tu perro aprenda a gestionar la ansiedad, en cualquier situación.</p>
+        </article>
+        <article class="case-card">
+          <div class="num">04</div>
+          <h3>Reactividad e impulsividad</h3>
+          <p>Reacciones intensas ante otros perros, personas o estímulos. Buscamos que tu perro aprenda a gestionar lo que siente.</p>
+        </article>
+        <article class="case-card">
+          <div class="num">05</div>
+          <h3>Miedos y fobias</h3>
+          <p>Ruidos, lugares o situaciones que tu perro puede vivir con miedo. Os acompañamos para recuperar la calma, a su ritmo.</p>
+        </article>
+        <article class="case-card">
+          <div class="num">06</div>
+          <h3>Posesión de recursos</h3>
+          <p>Cuando tu perro puede sentir que tiene que proteger su comida, sus juguetes o su espacio. Trabajamos la seguridad y la confianza.</p>
+        </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · CÓMO EMPEZAR ============ -->
+<section class="empezar" id="empezar">
+  <div class="wrap section-pad reveal">
+    <div class="section-intro">
+      <p class="eyebrow"><span class="bar"></span>Cómo empezar</p>
+      <h2 class="display">Empezamos hablando</h2>
+      <p>No hay dos perros iguales, así que empezamos por conocer el tuyo. Nos cuentas qué está pasando, te hacemos algunas preguntas y vemos juntos cómo podemos ayudarte. A partir de ahí, preparamos la primera clase a la medida de tu caso.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <h3>Hablas con nosotros</h3>
+        <p>Nos cuentas tu caso, sin compromiso. Te orienta Victoria, nuestra asistente.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3>Conocemos a tu perro</h3>
+        <p>Entendemos qué está pasando y qué necesitáis tu perro y tú.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3>Empezamos a trabajar</h3>
+        <p>Una primera clase pensada para vosotros, en vuestro propio entorno.</p>
+      </div>
+    </div>
+    <div class="cta-row">
+      <a class="btn" href="https://wa.me/34622922173" target="_blank" rel="noopener">Habla con nosotros</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · LA APP DE CLIENTE ============ -->
+<section class="eco" id="ecosistema">
+  <div class="wrap section-pad reveal">
+    <div class="section-intro">
+      <p class="eyebrow on-dark"><span class="bar"></span>La app para tutores</p>
+      <h2 class="display">Tu proceso,<br>en un solo lugar</h2>
+      <p>No nos limitamos a dar clases. Cuando empiezas a trabajar con nosotros, tienes una app pensada para acompañarte entre clase y clase. Esto es lo que encontrarás en ella.</p>
+    </div>
+    <div class="eco-grid">
+
+      <article class="eco-card">
+        <div class="eco-preview isla" style="display:flex">
+          <svg viewBox="0 0 114 72" width="92" height="58" aria-hidden="true"><path d="M12,50C10,44 16,40 22,36C30,30 40,24 50,20L58,16C62,13 68,9 73,9C76,9 77,12 74,15C71,18 67,20 64,22C68,23 72,21 77,20C82,19 88,22 94,28C100,33 104,38 102,44C100,50 92,55 84,58C72,63 58,65 46,63C34,61 24,60 18,56C14,53 13,52 12,50Z" fill="#C8102E"></path></svg>
+          <div>
+            <div class="score">78</div>
+            <div class="score-label">su bienestar</div>
+            <div class="meter"><span style="width:78%"></span></div>
+          </div>
+        </div>
+        <h3>Evalúa su bienestar</h3>
+        <p>Mides el nivel de bienestar y felicidad de tu perro, y ves cómo evoluciona a lo largo del proceso.</p>
+      </article>
+
+      <article class="eco-card">
+        <div class="eco-preview eco-preview--pad" style="justify-content:center;gap:13px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:11px;color:rgba(245,239,224,.55);width:80px">Tirar de la correa</span>
+            <span style="display:flex;gap:5px">
+              <i style="width:13px;height:13px;border-radius:4px;background:#C8102E;display:block"></i>
+              <i style="width:13px;height:13px;border-radius:4px;background:#E0A52E;display:block"></i>
+              <i style="width:13px;height:13px;border-radius:4px;background:#E0A52E;display:block"></i>
+              <i style="width:13px;height:13px;border-radius:4px;background:#6E9A3C;display:block"></i>
+            </span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:11px;color:rgba(245,239,224,.55);width:80px">Ladridos</span>
+            <span style="display:flex;gap:5px">
+              <i style="width:13px;height:13px;border-radius:4px;background:#E0A52E;display:block"></i>
+              <i style="width:13px;height:13px;border-radius:4px;background:#6E9A3C;display:block"></i>
+              <i style="width:13px;height:13px;border-radius:4px;background:#6E9A3C;display:block"></i>
+              <i style="width:13px;height:13px;border-radius:4px;background:#6E9A3C;display:block"></i>
+            </span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:11px;color:rgba(245,239,224,.55);width:80px">Saltar encima</span>
+            <span style="display:flex;gap:5px">
+              <i style="width:13px;height:13px;border-radius:4px;background:#C8102E;display:block"></i>
+              <i style="width:13px;height:13px;border-radius:4px;background:#C8102E;display:block"></i>
+              <i style="width:13px;height:13px;border-radius:4px;background:#E0A52E;display:block"></i>
+              <i style="width:13px;height:13px;border-radius:4px;background:#6E9A3C;display:block"></i>
+            </span>
+          </div>
+        </div>
+        <h3>Seguimiento de conductas</h3>
+        <p>Registráis juntos las conductas que estáis trabajando y ves su evolución, día a día.</p>
+      </article>
+
+      <article class="eco-card">
+        <div class="eco-preview eco-preview--pad tasks">
+          <div class="task"><span class="checkbox"></span><span class="line"></span></div>
+          <div class="task"><span class="checkbox"></span><span class="line"></span></div>
+          <div class="task"><span class="checkbox off"></span><span class="line faint"></span></div>
+          <div class="progress"><span style="width:66%"></span></div>
+          <div class="progress-label">Progreso de la semana</div>
+        </div>
+        <h3>Rutina entre clases</h3>
+        <p>Los ejercicios para practicar en casa, con vídeos, para que sepas siempre qué toca.</p>
+      </article>
+
+      <article class="eco-card">
+        <div class="eco-preview eco-preview--pad chat">
+          <div class="status"><span class="dot"></span><span>Tu adiestrador</span></div>
+          <div class="bubble bubble--in">¿Cómo fue la práctica de hoy?</div>
+          <div class="bubble bubble--out">Mucho mejor, casi no tiró de la correa</div>
+        </div>
+        <h3>Siempre en contacto</h3>
+        <p>El resumen de cada clase y comunicación directa con el adiestrador durante todo el proceso.</p>
+      </article>
+
+    </div>
+    <p style="text-align:center;margin-top:34px;font-size:14px;color:rgba(245,239,224,.5)">Todo reunido en una sola app, parte de tu proceso con nosotros.</p>
+  </div>
+</section>
+
+<!-- ============ 6 · CONFIANZA ============ -->
+<section class="confianza" id="confianza">
+  <div class="wrap section-pad reveal">
+    <p class="eyebrow"><span class="bar"></span>Por qué confiar en nosotros</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="big">2019</div>
+        <small>En Mallorca desde 2019</small>
+      </div>
+      <div class="stat">
+        <div class="big">+14</div>
+        <small>Años de experiencia profesional</small>
+      </div>
+      <div class="stat">
+        <div class="big rojo">Cognitivo-<br>emocional</div>
+        <small>Nuestra metodología de trabajo</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 · CONTACTO / CIERRE ============ -->
+<section class="contacto" id="contacto">
+  <svg class="island-watermark" viewBox="0 0 114 72" width="640" height="404" aria-hidden="true"><path d="M12,50C10,44 16,40 22,36C30,30 40,24 50,20L58,16C62,13 68,9 73,9C76,9 77,12 74,15C71,18 67,20 64,22C68,23 72,21 77,20C82,19 88,22 94,28C100,33 104,38 102,44C100,50 92,55 84,58C72,63 58,65 46,63C34,61 24,60 18,56C14,53 13,52 12,50Z" fill="#F5EFE0"></path></svg>
+  <div class="inner reveal">
+    <div>
+      <h2>Tu perro merece<br>ser feliz <span class="accent">hoy</span></h2>
+      <p class="lead">Cuéntanos qué está pasando. Te escuchamos y vemos juntos cómo empezar.</p>
+      <a class="btn btn--lg" href="https://wa.me/34622922173" target="_blank" rel="noopener">Habla con nosotros</a>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <h4>Teléfono</h4>
+        <a class="phone" href="tel:+34622922173">622 922 173</a>
+        <a class="wa" href="https://wa.me/34622922173" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+      </div>
+      <div>
+        <h4>Dónde estamos</h4>
+        <div class="body">Palma de Mallorca<br>Adiestramiento a domicilio</div>
+      </div>
+      <div>
+        <h4>Horario</h4>
+        <div class="body">Lun – Vie · 10–13 y 17–20<br>Sáb · 10–13<br>Dom · cerrado</div>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <a class="social" href="https://instagram.com/perrosdelaisla" target="_blank" rel="noopener">Instagram · @perrosdelaisla</a>
+        <a class="social" href="https://facebook.com/perrosdelaisla" target="_blank" rel="noopener">Facebook · @perrosdelaisla</a>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="fbrand">
+        <svg viewBox="0 0 114 72" width="40" height="25" aria-hidden="true"><path d="M12,50C10,44 16,40 22,36C30,30 40,24 50,20L58,16C62,13 68,9 73,9C76,9 77,12 74,15C71,18 67,20 64,22C68,23 72,21 77,20C82,19 88,22 94,28C100,33 104,38 102,44C100,50 92,55 84,58C72,63 58,65 46,63C34,61 24,60 18,56C14,53 13,52 12,50Z" fill="#C8102E"></path></svg>
+        <div>
+          <b>Perros de la Isla</b>
+          <small>Adiestramiento canino · Mallorca</small>
+          <small style="text-transform:none;letter-spacing:.2px;font-weight:500;color:rgba(245,239,224,.5);margin-top:4px">perrosdelaisla.es</small>
+        </div>
+      </div>
+      <div class="sign">El equipo de Perros de la Isla</div>
+    </footer>
+  </div>
+</section>
+
+</body></html>
