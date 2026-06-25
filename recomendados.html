@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Productos que recomendamos · Perros de la Isla</title>
+<meta name="description" content="Los productos que usamos y recomendamos en nuestro trabajo diario de educación y bienestar canino en Mallorca: arneses en Y, juguetes Kong, mantas olfativas, masticables naturales y correas Flexi.">
+<style>
+/* =========================================================
+   PERROS DE LA ISLA — Productos recomendados
+   Hereda paleta y tipografía de la landing.
+   ========================================================= */
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url("BebasNeue.ttf") format('truetype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url("Inter.ttf") format('truetype-variations');
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+:root {
+  --rojo:#C8102E; --rojo-h:#a93226; --oliva:#6B7A3A; --oliva-l:#9CB64B;
+  --negro:#1A1A1A; --crema:#F5EFE0; --crema-2:#EFE7D6;
+  --texto:#1A1A1A; --texto-2:#3d3833; --texto-3:#5A534C;
+  --display:'Bebas Neue', sans-serif;
+  --body:'Inter', system-ui, -apple-system, sans-serif;
+  --maxw:1200px; --pad-x:clamp(20px,5vw,64px);
+}
+* { box-sizing:border-box; }
+html,body { margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:var(--body); color:var(--texto); background:var(--crema);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  -webkit-tap-highlight-color:transparent; overflow-x:hidden;
+}
+img { display:block; max-width:100%; }
+a { color:inherit; }
+::selection { background:var(--rojo); color:var(--crema); }
+a:focus-visible, button:focus-visible { outline:2px solid var(--rojo); outline-offset:3px; border-radius:4px; }
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} }
+
+.wrap { max-width:var(--maxw); margin:0 auto; padding-left:var(--pad-x); padding-right:var(--pad-x); }
+.display { font-family:var(--display); font-weight:400; letter-spacing:1px; }
+.eyebrow {
+  display:flex; align-items:center; gap:12px; font-size:12px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase; color:var(--rojo); margin-bottom:18px;
+}
+.eyebrow .bar { width:30px; height:2px; background:var(--rojo); display:block; flex:none; }
+
+/* CTA */
+.btn {
+  display:inline-block; background:var(--rojo); color:var(--crema); font-weight:600;
+  font-size:16px; padding:17px 30px; border:none; border-radius:11px; text-decoration:none;
+  cursor:pointer; box-shadow:0 6px 18px rgba(200,16,46,.26);
+  transition:transform .12s ease, background .15s ease;
+}
+.btn:hover { background:var(--rojo-h); }
+.btn:active { transform:scale(.97); }
+.btn--sm { font-size:14px; padding:12px 22px; box-shadow:0 4px 14px rgba(200,16,46,.22); }
+
+/* Header (idéntico a la landing) */
+.site-header {
+  position:sticky; top:0; z-index:50; background:rgba(245,239,224,.82);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(26,26,26,.10);
+}
+.site-header .wrap { padding-top:14px; padding-bottom:14px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+.brand img { width:54px; height:54px; }
+.brand span { font-family:var(--display); font-size:28px; letter-spacing:1.5px; line-height:1; }
+
+/* Intro */
+.intro { padding:clamp(44px,6vw,80px) 0 clamp(8px,2vw,16px); }
+.intro h1 { font-family:var(--display); font-weight:400; font-size:clamp(48px,9vw,104px); line-height:.9; margin:0; text-wrap:balance; }
+.intro .accent { color:var(--rojo); }
+.intro p.lead { font-size:clamp(16px,1.4vw,19px); line-height:1.65; color:var(--texto-3); max-width:600px; margin:24px 0 0; }
+
+/* Aviso de afiliado */
+.disclosure {
+  max-width:var(--maxw); margin:clamp(28px,4vw,40px) auto 0;
+  background:var(--crema-2); border:1px solid rgba(26,26,26,.12); border-left:4px solid var(--oliva);
+  border-radius:12px; padding:20px 24px;
+}
+.disclosure p { margin:0; font-size:14.5px; line-height:1.6; color:var(--texto-2); }
+
+/* Secciones de productos */
+.cat { padding:clamp(40px,5.5vw,72px) 0; }
+.cat:nth-of-type(even) { background:var(--crema-2); }
+.cat .head { max-width:680px; }
+.cat h2 { font-family:var(--display); font-weight:400; font-size:clamp(34px,5vw,56px); line-height:.95; letter-spacing:.5px; margin:0 0 14px; }
+.cat .head p { font-size:16px; line-height:1.7; color:var(--texto-3); margin:0; }
+
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px; margin-top:clamp(32px,4vw,48px); }
+.pcard {
+  background:var(--crema); border:1px solid rgba(26,26,26,.10); border-radius:16px;
+  padding:26px 24px; display:flex; flex-direction:column;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.cat:nth-of-type(even) .pcard { background:var(--crema); }
+.pcard:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(26,26,26,.08); }
+.pcard .tag-lbl { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--oliva); margin-bottom:10px; }
+.pcard h3 { font-family:var(--display); font-weight:400; font-size:26px; letter-spacing:.5px; margin:0 0 12px; }
+.pcard p { font-size:15px; line-height:1.65; color:var(--texto-3); margin:0 0 22px; }
+.pcard .btn { margin-top:auto; align-self:flex-start; }
+
+/* Footer (idéntico a la landing) */
+.foot-section { background:var(--negro); color:var(--crema); padding:clamp(44px,6vw,72px) 0 36px; }
+.site-footer { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px; }
+.site-footer .fbrand { display:flex; align-items:center; gap:14px; }
+.site-footer .fbrand b { display:block; font-family:var(--display); font-weight:400; font-size:22px; letter-spacing:1.5px; color:var(--crema); line-height:1; }
+.site-footer .fbrand small { display:block; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:rgba(245,239,224,.5); margin-top:3px; }
+.site-footer .fbrand small.dom { text-transform:none; letter-spacing:.2px; font-weight:500; margin-top:4px; }
+.site-footer .fbrand small.dom a { color:inherit; text-decoration:none; }
+.site-footer .fbrand .fdot { width:14px; height:14px; border-radius:999px; background:var(--rojo); flex:none; }
+.site-footer .sign { font-size:13px; color:rgba(245,239,224,.55); }
+.foot-note { max-width:var(--maxw); margin:28px auto 0; padding:20px var(--pad-x) 0; border-top:1px solid rgba(245,239,224,.12); }
+.foot-note p { font-size:12.5px; line-height:1.6; color:rgba(245,239,224,.5); margin:0; }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="https://perrosdelaisla.es">
+      <img src="img_0.png" alt="Perros de la Isla" width="54" height="54">
+      <span>Perros de la Isla</span>
+    </a>
+    <a class="btn btn--sm" href="https://wa.me/34622922173" target="_blank" rel="noopener">Habla con nosotros</a>
+  </div>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section class="intro">
+  <div class="wrap">
+    <div class="eyebrow"><span class="bar"></span>Lo que usamos cada día</div>
+    <h1>Productos que <span class="accent">recomendamos</span></h1>
+    <p class="lead">Estos son los productos que utilizamos en nuestro trabajo diario y que aconsejamos a las familias con las que trabajamos. Los hemos elegido por cómo ayudan al bienestar del perro, no por moda. Aquí te explicamos qué buscar y por qué.</p>
+  </div>
+  <div class="disclosure">
+    <p>Estos son los productos que usamos en el día a día y que de verdad nos funcionan. Algunos enlaces son de afiliado: si compras a través de ellos, Amazon nos abona una pequeña comisión sin coste adicional para ti, y nos ayuda a sostener el proyecto. Si algo está en esta lista, es porque se lo daríamos a nuestro propio perro.</p>
+  </div>
+</section>
+
+<!-- ============ ARNESES ============ -->
+<section class="cat">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><span class="bar"></span>Paseo y manejo</div>
+      <h2>Arneses en Y</h2>
+      <p>Recomendamos siempre el arnés en forma de Y: deja libre la articulación del hombro, reparte la presión por el pecho y no comprime el cuello como un collar. Evitamos los modelos que cruzan por delante del pecho, porque limitan la zancada y el movimiento natural.</p>
+    </div>
+    <div class="cards">
+      <article class="pcard">
+        <div class="tag-lbl">Opción fiable para empezar</div>
+        <h3>Arnés en Y — Trixie</h3>
+        <p>Una marca accesible y de confianza para dar el paso al arnés en Y. Forma correcta, acolchado y puntos de ajuste para adaptarlo bien al cuerpo del perro. Una compra sensata para la mayoría.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=trixie+arnes+perro+en+y&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+      <article class="pcard">
+        <div class="tag-lbl">Gama alta</div>
+        <h3>Arnés en Y — gama profesional</h3>
+        <p>Para quien quiere lo mejor: marcas como Haqihana o Perfect Fit, con un ajuste milimétrico, materiales más duraderos y un diseño pensado al detalle para no interferir en el movimiento. Una inversión que dura años.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=haqihana+arnes+perro&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONG ============ -->
+<section class="cat">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><span class="bar"></span>Estimulación y calma</div>
+      <h2>Juguetes Kong</h2>
+      <p>Caucho seguro y muy resistente. Rellenos y, mejor aún, congelados, son una de nuestras mejores herramientas para la masticación saludable, la gestión de los ratos a solas y el autocontrol.</p>
+    </div>
+    <div class="cards">
+      <article class="pcard">
+        <div class="tag-lbl">El imprescindible</div>
+        <h3>Kong Classic</h3>
+        <p>El que recomendamos para empezar. Se rellena con comida y se congela para que dure más. Ideal para entretener, calmar y acompañar los momentos de soledad.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=kong+classic+perro&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+      <article class="pcard">
+        <div class="tag-lbl">Masticadores intensos</div>
+        <h3>Kong Extreme</h3>
+        <p>El caucho negro, más duro y resistente. La opción para perros que mastican con mucha fuerza y se cansan rápido de los juguetes normales.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=kong+extreme+perro&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MANTAS OLFATIVAS ============ -->
+<section class="cat">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><span class="bar"></span>Olfato, lamido y calma</div>
+      <h2>Comida y gasto mental</h2>
+      <p>Dar la comida de forma que el perro tenga que trabajarla —olfateando, lamiendo o resolviendo cómo sacarla— relaja y cansa más que un paseo largo. Tres de nuestras herramientas favoritas para los días de lluvia y para los perros que necesitan aprender a calmarse.</p>
+    </div>
+    <div class="cards">
+      <article class="pcard">
+        <div class="tag-lbl">Trabajo de olfato</div>
+        <h3>Manta olfativa</h3>
+        <p>Busca un tamaño acorde a tu perro y de tejido lavable. Empieza escondiendo la comida a la vista y ve subiendo la dificultad poco a poco.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=manta+olfativa+perro&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+      <article class="pcard">
+        <div class="tag-lbl">Lamer para calmarse</div>
+        <h3>LickiMat</h3>
+        <p>Alfombrilla con relieve donde untas comida blanda (paté húmedo, yogur natural...). El lamido repetido libera tensión y ayuda a relajar. Muy útil en momentos de estrés, como baños o cortes de uñas.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=lickimat+perro&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+      <article class="pcard">
+        <div class="tag-lbl">Comida en movimiento</div>
+        <h3>Kong Wobbler</h3>
+        <p>Un dispensador que se balancea y suelta la comida poco a poco. Ralentiza la ingesta y le da un buen trabajo mental mientras come. Perfecto para perros que devoran demasiado rápido.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=kong+wobbler&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MASTICABLES ============ -->
+<section class="cat">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><span class="bar"></span>Masticación natural</div>
+      <h2>Para masticar</h2>
+      <p>Masticar relaja y ayuda al perro a autorregularse. Preferimos alternativas naturales y duraderas. Ofrécelas siempre bajo supervisión y elige el tamaño adecuado al perro.</p>
+    </div>
+    <div class="cards">
+      <article class="pcard">
+        <div class="tag-lbl">Muy duradero</div>
+        <h3>Churpi (queso de yak)</h3>
+        <p>Queso duro prensado, de larga duración y bajo en grasa. Uno de los masticables que mejor aguantan y que más gustan.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=churpi+perro+queso+himalaya&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+      <article class="pcard">
+        <div class="tag-lbl">Larguísima duración</div>
+        <h3>Cuernos (asta de ciervo)</h3>
+        <p>De los más resistentes que hay. Duran semanas. Recomendados para masticadores constantes; vigila el desgaste en perros muy intensos.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=asta+ciervo+perro+masticar&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+      <article class="pcard">
+        <div class="tag-lbl">Más blando y digestivo</div>
+        <h3>Cartílagos</h3>
+        <p>Una opción más blanda y fácil de digerir, para masticaciones más cortas o perros con menos potencia de mordida.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=cartilago+perro+snack+natural&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+      <article class="pcard">
+        <div class="tag-lbl">Alternativa al palo</div>
+        <h3>Maderas de masticación</h3>
+        <p>Madera de raíz (como el brezo) que no astilla como un palo del campo. Una alternativa segura para los perros a los que les encanta roer madera.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=madera+masticar+perro+raiz+brezo&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLEXI ============ -->
+<section class="cat">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><span class="bar"></span>Libertad con control</div>
+      <h2>Correas extensibles Flexi</h2>
+      <p>Dan al perro libertad para explorar manteniendo el control. Recomendamos <strong>siempre el modelo de cinta, nunca el de cuerda</strong>: la cuerda puede causar cortes y quemaduras, y se enreda con facilidad. Los modelos Giant o Comfort, de 5 u 8 metros según el perro, son nuestra elección.</p>
+    </div>
+    <div class="cards">
+      <article class="pcard">
+        <div class="tag-lbl">Siempre de cinta</div>
+        <h3>Flexi de cinta — Giant / Comfort</h3>
+        <p>Elige la versión de cinta (no de cuerda) y la longitud de 5 u 8 metros según el tamaño y el entorno. El modelo Giant para perros grandes, el Comfort para un buen agarre.</p>
+        <a class="btn btn--sm" href="https://www.amazon.es/s?k=flexi+cinta+perro+giant&tag=perrosdelai00-21" target="_blank" rel="noopener sponsored">Verlo en Amazon</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<section class="foot-section">
+  <div class="wrap">
+    <div class="site-footer">
+      <div class="fbrand">
+        <span class="fdot"></span>
+        <div>
+          <b>Perros de la Isla</b>
+          <small>Adiestramiento canino · Mallorca</small>
+          <small class="dom"><a href="https://perrosdelaisla.es">perrosdelaisla.es</a></small>
+        </div>
+      </div>
+      <div class="sign">El equipo de Perros de la Isla</div>
+    </div>
+  </div>
+  <div class="foot-note">
+    <p>Perros de la Isla participa en el programa de Afiliados de Amazon EU, diseñado para que páginas web puedan obtener comisiones por publicidad enlazando a Amazon.es. Como Afiliados de Amazon, obtenemos ingresos por las compras adscritas que cumplen los requisitos. Los precios y la disponibilidad de los productos pueden variar y se confirman en Amazon en el momento de la compra.</p>
+  </div>
+</section>
+
+</body></html>
