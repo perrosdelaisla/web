@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guías PDLI · Perros de la Isla</title>
+<meta name="description" content="Guías prácticas para entender a tu perro, escritas por el equipo de Perros de la Isla. Mordisqueo, ladridos, angustia por separación y miedo.">
+<style>/* =========================================================
+   PERROS DE LA ISLA — Guías
+   Replica la estética de la home (index.html).
+   Paleta:  rojo #C8102E · oliva #6B7A3A · negro #1A1A1A · crema #F5EFE0
+   Tipos:   Bebas Neue (display) · Inter (cuerpo)
+   ========================================================= */
+
+/* ---------- Fuentes (self-hosted, en la raíz del repo) ---------- */
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url("../BebasNeue.ttf") format('truetype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url("../Inter.ttf") format('truetype-variations');
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  --rojo:   #C8102E;
+  --rojo-h: #a93226;
+  --rojo-l: #ff8060;
+  --oliva:  #6B7A3A;
+  --oliva-l:#9CB64B;
+  --negro:  #1A1A1A;
+  --crema:  #F5EFE0;
+  --crema-2:#EFE7D6;
+  --placeholder-bg: #EAE1CD;
+  --placeholder-bd: #D8CDB4;
+  --texto:  #1A1A1A;
+  --texto-2:#3d3833;
+  --texto-3:#5A534C;
+  --display: 'Bebas Neue', sans-serif;
+  --body: 'Inter', system-ui, -apple-system, sans-serif;
+  --maxw: 1200px;
+  --pad-x: clamp(20px, 5vw, 64px);
+}
+
+/* ---------- Reset / base ---------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  color: var(--texto);
+  background: var(--crema);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+::selection { background: var(--rojo); color: var(--crema); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--rojo); outline-offset: 3px; border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* ---------- Utilidades ---------- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-left: var(--pad-x); padding-right: var(--pad-x); }
+.display { font-family: var(--display); font-weight: 400; letter-spacing: 1px; }
+.accent { color: var(--rojo); }
+.eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--rojo); margin-bottom: 22px;
+}
+.eyebrow .bar { width: 30px; height: 2px; background: var(--rojo); display: block; flex: none; }
+
+/* CTA primario */
+.btn {
+  display: inline-block; background: var(--rojo); color: var(--crema);
+  font-weight: 600; font-size: 16px; padding: 17px 30px; border: none;
+  border-radius: 11px; text-decoration: none; cursor: pointer;
+  box-shadow: 0 6px 18px rgba(200,16,46,.26);
+  transition: transform .12s ease, background .15s ease;
+}
+.btn:hover { background: var(--rojo-h); }
+.btn:active { transform: scale(.97); }
+.btn--lg { font-size: 17px; padding: 18px 36px; box-shadow: 0 6px 22px rgba(200,16,46,.4); }
+.btn--sm { font-size: 14px; padding: 12px 22px; box-shadow: 0 4px 14px rgba(200,16,46,.22); }
+
+/* ---------- Header (idéntico a la home) ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(245,239,224,.82);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(26,26,26,.10);
+}
+.site-header .wrap {
+  padding-top: 14px; padding-bottom: 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand img { width: 54px; height: 54px; }
+.brand span { font-family: var(--display); font-size: 28px; letter-spacing: 1.5px; line-height: 1; }
+.nav-actions { display: flex; align-items: center; gap: clamp(14px,2.5vw,26px); }
+.nav-link {
+  font-weight: 600; font-size: 15px; text-decoration: none; color: var(--texto);
+  padding-bottom: 3px; border-bottom: 2px solid transparent;
+  transition: border-color .15s ease, color .15s ease;
+}
+.nav-link:hover { border-color: var(--rojo); }
+.nav-link.is-current { color: var(--rojo); border-color: var(--rojo); }
+
+/* ---------- Separador con isla ---------- */
+.island-sep {
+  display: flex; align-items: center; justify-content: center; gap: 18px;
+  max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad-x);
+}
+.island-sep .rule { height: 1px; flex: 1; background: rgba(26,26,26,.13); }
+.island-sep .sep-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--rojo); flex: none; }
+.island-watermark { position: absolute; pointer-events: none; }
+
+/* ---------- Hero corto ---------- */
+.guias-hero .wrap { padding-top: clamp(48px,7vw,88px); padding-bottom: clamp(34px,5vw,52px); }
+.guias-hero h1 { font-size: clamp(52px,9vw,104px); line-height: .9; margin: 0; text-wrap: balance; }
+.guias-hero p.lead { font-size: clamp(16px,1.4vw,19px); line-height: 1.6; color: var(--texto-3); max-width: 560px; margin: 22px 0 0; }
+
+/* ---------- Contenido de guías ---------- */
+.guias-content .wrap { padding-bottom: clamp(72px,10vw,128px); }
+
+/* Lead magnet destacado (distinto de las tarjetas) */
+.lead-magnet {
+  background: var(--crema-2); border: 1px solid #E1D7C0; border-left: 5px solid var(--rojo);
+  border-radius: 16px; padding: clamp(30px,5vw,52px);
+  margin-bottom: clamp(44px,6vw,72px);
+}
+.badge-gratis {
+  display: inline-block; background: var(--rojo); color: var(--crema);
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
+}
+.lead-magnet h2 { font-family: var(--display); font-weight: 400; font-size: clamp(32px,4.5vw,52px); line-height: .98; letter-spacing: .5px; margin: 0; max-width: 18ch; }
+.lead-magnet p { font-size: clamp(16px,1.3vw,18px); line-height: 1.7; color: var(--texto-2); margin: 18px 0 0; max-width: 60ch; }
+.lead-magnet .btn { margin-top: 28px; }
+
+/* Grid de guías de pago — 2 col desktop, 1 col móvil */
+.guias-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(18px,2.5vw,28px); margin-top: clamp(40px,5vw,56px); }
+@media (max-width: 720px) { .guias-grid { grid-template-columns: 1fr; } }
+
+.guia-card {
+  background: var(--crema); border: 1px solid #E1D7C0; border-radius: 14px;
+  padding: clamp(22px,3vw,30px); display: flex; flex-direction: column;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.guia-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(26,26,26,.08); }
+
+/* Portada (placeholder gris hasta enchufar la imagen real) */
+.guia-cover {
+  position: relative; aspect-ratio: 3 / 4; width: 100%;
+  background: var(--placeholder-bg); border: 1px solid var(--placeholder-bd);
+  border-radius: 12px; overflow: hidden; margin-bottom: 22px;
+  display: flex; align-items: center; justify-content: center;
+}
+.guia-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.guia-cover .ph-label {
+  font-family: var(--display); font-size: 22px; letter-spacing: 1.5px;
+  color: #B3A78C; font-weight: 400;
+}
+
+.guia-card h3 { font-family: var(--display); font-weight: 400; font-size: clamp(26px,3vw,32px); letter-spacing: .5px; margin: 0 0 12px; }
+.guia-card p { font-size: 15px; line-height: 1.65; color: var(--texto-3); margin: 0; }
+.guia-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 24px; padding-top: 22px; border-top: 1px solid rgba(26,26,26,.10); }
+.guia-valor { font-family: var(--display); font-size: 30px; letter-spacing: 1px; color: var(--negro); line-height: 1; }
+
+/* ---------- Cierre (oscuro, como la home) ---------- */
+.cierre { background: var(--negro); color: var(--crema); position: relative; overflow: hidden; }
+.cierre .island-watermark { bottom: -120px; right: -120px; opacity: .045; }
+.cierre .inner { position: relative; max-width: var(--maxw); margin: 0 auto; padding: clamp(72px,10vw,128px) var(--pad-x) clamp(40px,6vw,64px); }
+.cierre h2 { font-family: var(--display); font-weight: 400; font-size: clamp(44px,8vw,104px); line-height: .88; letter-spacing: 1px; margin: 0; color: var(--crema); }
+
+.site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; margin-top: clamp(48px,6vw,72px); padding-top: 32px; border-top: 1px solid rgba(245,239,224,.12); }
+.site-footer .fbrand { display: flex; align-items: center; gap: 14px; }
+.site-footer .fbrand b { display: block; font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: 1.5px; color: var(--crema); line-height: 1; }
+.site-footer .fbrand small { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(245,239,224,.5); margin-top: 3px; }
+.site-footer .fbrand .fdot { width: 14px; height: 14px; border-radius: 999px; background: var(--rojo); flex: none; }
+.site-footer .sign { font-size: 13px; color: rgba(245,239,224,.55); }
+</style>
+
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../">
+      <img src="../img_0.png" alt="Perros de la Isla" width="54" height="54">
+      <span>Perros de la Isla</span>
+    </a>
+    <nav class="nav-actions">
+      <a class="nav-link is-current" href="./" aria-current="page">Guías</a>
+      <a class="btn btn--sm" href="https://wa.me/34622922173" target="_blank" rel="noopener">Habla con nosotros</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ A · HERO CORTO ============ -->
+<section class="guias-hero">
+  <div class="wrap">
+    <p class="eyebrow"><span class="bar"></span>Guías para tutores</p>
+    <h1 class="display">Guías <span class="accent">PDLI</span></h1>
+    <p class="lead">Claves prácticas para entender a tu perro, escritas por el equipo de Perros de la Isla.</p>
+  </div>
+</section>
+
+<!-- ============ SEPARADOR ISLA ============ -->
+<div class="island-sep">
+  <span class="rule"></span>
+  <span class="sep-dot"></span>
+  <span class="rule"></span>
+</div>
+
+<!-- ============ CONTENIDO ============ -->
+<section class="guias-content">
+  <div class="wrap" style="padding-top:clamp(44px,6vw,72px)">
+
+    <!-- B · LEAD MAGNET destacado -->
+    <div class="lead-magnet">
+      <span class="badge-gratis">Gratis</span>
+      <h2>Tu perro te habla (y no lo estás escuchando)</h2>
+      <p>Tu perro te comunica cosas todo el tiempo. Aprende a leer las señales que ya te está enviando. Empieza por aquí.</p>
+      <a class="btn" href="#"><!-- LEMON_LINK_gratis: pendiente modo real -->Descargar gratis</a>
+    </div>
+
+    <!-- C · GRID de guías de pago -->
+    <p class="eyebrow"><span class="bar"></span>Guías completas</p>
+    <div class="guias-grid">
+
+      <!-- Tarjeta 1 -->
+      <article class="guia-card">
+        <div class="guia-cover">
+          <span class="ph-label">Portada</span>
+          <img src="../guia_cachorro-muerde.jpg" alt="Portada de la guía: Mi cachorro muerde" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <h3>Mi cachorro muerde</h3>
+        <p>Por qué muerde tu cachorro y qué necesita aprender todavía. Una guía para entender el mordisqueo desde su desarrollo, sin castigos.</p>
+        <div class="guia-foot">
+          <span class="guia-valor">5,90 €</span>
+          <a class="btn btn--sm" href="#"><!-- LEMON_LINK_cachorro-muerde: pendiente modo real -->Conseguir la guía</a>
+        </div>
+      </article>
+
+      <!-- Tarjeta 2 -->
+      <article class="guia-card">
+        <div class="guia-cover">
+          <span class="ph-label">Portada</span>
+          <img src="../guia_ladra-otros-perros.jpg" alt="Portada de la guía: Mi perro ladra a otros perros" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <h3>Mi perro ladra a otros perros</h3>
+        <p>Qué te está diciendo tu perro cuando ladra a otros, y por qué no es solo cuestión de obediencia. Las claves para empezar a leerlo.</p>
+        <div class="guia-foot">
+          <span class="guia-valor">5,90 €</span>
+          <a class="btn btn--sm" href="#"><!-- LEMON_LINK_ladra-otros-perros: pendiente modo real -->Conseguir la guía</a>
+        </div>
+      </article>
+
+      <!-- Tarjeta 3 -->
+      <article class="guia-card">
+        <div class="guia-cover">
+          <span class="ph-label">Portada</span>
+          <img src="../guia_llora-cuando-me-voy.jpg" alt="Portada de la guía: Mi perro llora cuando me voy" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <h3>Mi perro llora cuando me voy</h3>
+        <p>Qué siente tu perro cuando te vas y por qué no es un capricho. Entiende qué hay detrás de la angustia por separación.</p>
+        <div class="guia-foot">
+          <span class="guia-valor">5,90 €</span>
+          <a class="btn btn--sm" href="#"><!-- LEMON_LINK_llora-cuando-me-voy: pendiente modo real -->Conseguir la guía</a>
+        </div>
+      </article>
+
+      <!-- Tarjeta 4 -->
+      <article class="guia-card">
+        <div class="guia-cover">
+          <span class="ph-label">Portada</span>
+          <img src="../guia_tiene-miedo.jpg" alt="Portada de la guía: Mi perro tiene miedo" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <h3>Mi perro tiene miedo</h3>
+        <p>Cómo reconocer el miedo en tu perro y por qué acompañarlo no lo empeora. Las claves para entender qué le pasa y empezar a ayudarlo.</p>
+        <div class="guia-foot">
+          <span class="guia-valor">5,90 €</span>
+          <a class="btn btn--sm" href="#"><!-- LEMON_LINK_tiene-miedo: pendiente modo real -->Conseguir la guía</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ D · CIERRE ============ -->
+<section class="cierre">
+  <svg class="island-watermark" viewBox="0 0 114 72" width="640" height="404" aria-hidden="true"><path d="M12,50C10,44 16,40 22,36C30,30 40,24 50,20L58,16C62,13 68,9 73,9C76,9 77,12 74,15C71,18 67,20 64,22C68,23 72,21 77,20C82,19 88,22 94,28C100,33 104,38 102,44C100,50 92,55 84,58C72,63 58,65 46,63C34,61 24,60 18,56C14,53 13,52 12,50Z" fill="#F5EFE0"></path></svg>
+  <div class="inner">
+    <h2>Tu perro merece<br>ser feliz <span class="accent">HOY</span>.</h2>
+
+    <footer class="site-footer">
+      <div class="fbrand">
+        <span class="fdot"></span>
+        <div>
+          <b>Perros de la Isla</b>
+          <small>Educación canina · +14 años de experiencia · En Mallorca desde 2019</small>
+        </div>
+      </div>
+      <div class="sign">El equipo de Perros de la Isla</div>
+    </footer>
+  </div>
+</section>
+
+</body></html>
