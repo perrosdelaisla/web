@@ -144,6 +144,21 @@ a:focus-visible, button:focus-visible {
 .lead-magnet p { font-size: clamp(16px,1.3vw,18px); line-height: 1.7; color: var(--texto-2); margin: 18px 0 0; max-width: 60ch; }
 .lead-magnet .btn { margin-top: 28px; }
 
+/* Miniatura de guía gratuita (más pequeña que las portadas de pago) */
+.lead-magnet { display: flex; align-items: center; gap: clamp(20px, 3vw, 36px); }
+.lead-magnet__thumb {
+  flex: none; width: clamp(110px, 14vw, 160px);
+  border-radius: 10px; overflow: hidden;
+  border: 1px solid #E1D7C0; box-shadow: 0 8px 20px rgba(26,26,26,.10);
+  align-self: center;
+}
+.lead-magnet__thumb img { width: 100%; height: auto; display: block; }
+.lead-magnet__body { flex: 1 1 auto; min-width: 0; }
+@media (max-width: 620px) {
+  .lead-magnet { align-items: flex-start; gap: 16px; }
+  .lead-magnet__thumb { width: clamp(84px, 26vw, 112px); }
+}
+
 /* Grid de guías de pago — 2 col desktop, 1 col móvil */
 .guias-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(18px,2.5vw,28px); margin-top: clamp(40px,5vw,56px); }
 @media (max-width: 720px) { .guias-grid { grid-template-columns: 1fr; } }
@@ -226,17 +241,27 @@ a:focus-visible, button:focus-visible {
 
     <!-- B · LEAD MAGNET destacado -->
     <div class="lead-magnet">
-      <span class="badge-gratis">Gratis</span>
-      <h2>Tu perro te habla (y no lo estás escuchando)</h2>
-      <p>Tu perro te comunica cosas todo el tiempo. Aprende a leer las señales que ya te está enviando. Empieza por aquí.</p>
-      <a class="btn" href="#"><!-- LEMON_LINK_gratis: pendiente modo real -->Descargar gratis</a>
+      <div class="lead-magnet__thumb">
+        <img src="../guia_tu-perro-te-habla.png" alt="Portada de la guía gratuita: Tu perro te habla" loading="lazy" onerror="this.closest('.lead-magnet__thumb').style.display='none'">
+      </div>
+      <div class="lead-magnet__body">
+        <span class="badge-gratis">Gratis</span>
+        <h2>Tu perro te habla (y no lo estás escuchando)</h2>
+        <p>Tu perro te comunica cosas todo el tiempo. Aprende a leer las señales que ya te está enviando. Empieza por aquí.</p>
+        <a class="btn" href="#"><!-- LEMON_LINK_gratis: pendiente modo real -->Descargar gratis</a>
+      </div>
     </div>
 
     <div class="lead-magnet">
-      <span class="badge-gratis">Gratis</span>
-      <h2>Educar sin miedo</h2>
-      <p>Lo que la ciencia sabe sobre los métodos aversivos y por qué tu perro merece otra forma de aprender. Educar desde la comprensión, no desde el miedo.</p>
-      <a class="btn" href="#"><!-- LEMON_LINK_educar-sin-miedo: pendiente modo real -->Descargar gratis</a>
+      <div class="lead-magnet__thumb">
+        <img src="../guia_educar-sin-miedo.png" alt="Portada de la guía gratuita: Educar sin miedo" loading="lazy" onerror="this.closest('.lead-magnet__thumb').style.display='none'">
+      </div>
+      <div class="lead-magnet__body">
+        <span class="badge-gratis">Gratis</span>
+        <h2>Educar sin miedo</h2>
+        <p>Lo que la ciencia sabe sobre los métodos aversivos y por qué tu perro merece otra forma de aprender. Educar desde la comprensión, no desde el miedo.</p>
+        <a class="btn" href="#"><!-- LEMON_LINK_educar-sin-miedo: pendiente modo real -->Descargar gratis</a>
+      </div>
     </div>
 
     <!-- C · GRID de guías de pago -->
