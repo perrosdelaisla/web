@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ayúdanos a mejorar · Perros de la Isla</title>
+<meta name="description" content="Cuéntanos qué tal fue tu experiencia con Perros de la Isla. Anónima, unos 4 minutos.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F5EFE0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141312" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="pdli-logo-aro-160.png">
+<style>
+/* =========================================================
+   PERROS DE LA ISLA — Encuesta de salida  ·  perrosdelaisla.es/opinion
+   CANAL B estricto (PDLI_VISUAL.txt): crema, rojo de logo #D91B1D,
+   Bebas Neue + Inter, cero decoracion.
+   Preguntas: PDLI_ENCUESTA_SALIDA.md §4 — cerradas, no se tocan.
+   ========================================================= */
+
+/* ---------- Fuentes (self-hosted, mismo sistema que el resto del sitio) ---------- */
+@font-face{
+  font-family:'Bebas Neue';
+  src:url("../BebasNeue.ttf") format('truetype');
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Inter';
+  src:url("../Inter.ttf") format('truetype-variations');
+  font-weight:100 900; font-style:normal; font-display:swap;
+}
+
+/* ---------- Tokens ---------- */
+:root{
+  --rojo:#D91B1D;          /* rojo del logo, exacto */
+  --oliva:#6B7A3A;
+  --negro:#1A1A1A;
+  --crema:#F5EFE0;
+
+  --fondo:var(--crema);
+  --texto:var(--negro);
+  --texto-2:#4A443C;
+  --tenue:#6E6759;
+  --borde:#D8CDB4;
+  --tarjeta:#EFE7D6;
+  --acento:var(--rojo);
+  --acento-texto:#F5EFE0;
+  --etapa-texto:var(--texto);
+  --logo-cuna:transparent;
+
+  --display:'Bebas Neue', Impact, sans-serif;
+  --body:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --fondo:#141312;
+    --texto:#F0E9DA;
+    --texto-2:#D6CEBF;
+    --tenue:#A09990;      /* gris calido de PDLI_VISUAL para la jerarquia */
+    --borde:#3A342C;
+    --tarjeta:#1D1B19;
+    --acento:#E33234;     /* el rojo de marca sobre negro se apaga; se aclara solo aqui */
+    --acento-texto:#141312;
+    /* sobre fondo oscuro el texto va en crema y el rojo queda para el filete */
+    --etapa-texto:var(--texto);
+    --logo-cuna:var(--crema);  /* el logo NUNCA sobre negro: va sobre cuna crema */
+  }
+}
+:root[data-theme="dark"]{
+  --fondo:#141312; --texto:#F0E9DA; --texto-2:#D6CEBF; --tenue:#A09990;
+  --borde:#3A342C; --tarjeta:#1D1B19; --acento:#E33234; --acento-texto:#141312;
+  --etapa-texto:var(--texto); --logo-cuna:var(--crema);
+}
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; padding:0 20px 64px;
+  background:var(--fondo); color:var(--texto);
+  font-family:var(--body); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+}
+img{display:block;max-width:100%}
+.envoltorio{max-width:620px;margin:0 auto}
+:focus-visible{outline:2px solid var(--acento); outline-offset:3px; border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+
+/* ---------- Cabecera + barra de avance ---------- */
+.cabecera{
+  position:sticky; top:0; z-index:10;
+  background:var(--fondo);
+  margin:0 -20px; padding:22px 20px 0;
+}
+.marca{display:flex;align-items:center;gap:12px}
+.marca__logo{
+  width:46px;height:46px;flex:0 0 auto;border-radius:50%;
+  background:var(--logo-cuna);
+}
+.marca__nombre{
+  font-family:var(--display); font-size:20px; letter-spacing:.14em;
+  line-height:1; padding-top:3px;
+}
+/* El filete de marca hace de barra de avance: funcion, no adorno. */
+.filete{height:3px;background:var(--borde);margin-top:16px;border-radius:2px;overflow:hidden}
+.filete__lleno{
+  display:block;height:100%;width:0;background:var(--acento);
+  border-radius:2px;transition:width .35s ease;
+}
+
+/* ---------- Portada ---------- */
+h1{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(38px,9vw,54px); line-height:.98; letter-spacing:.02em;
+  margin:32px 0 18px; text-wrap:balance;
+}
+.entradilla p{margin:0 0 14px;max-width:60ch;color:var(--texto-2)}
+.entradilla p:last-child{margin-bottom:0}
+.entradilla p.matiz{font-size:14.5px;color:var(--tenue)}
+
+/* ---------- Etapas ---------- */
+.etapa{
+  font-family:var(--display); font-size:15px; letter-spacing:.18em;
+  color:var(--etapa-texto); display:flex; align-items:center; gap:10px;
+  margin:46px 0 20px;
+}
+/* El rojo de marca se queda en el filete; el rotulo va en el color del texto,
+   que es lo que pide PDLI_VISUAL sobre fondo oscuro y lo unico que cumple
+   contraste sobre crema a este tamano. */
+.etapa::after{content:"";flex:1;height:2px;background:var(--acento);opacity:.28}
+
+/* ---------- Preguntas ---------- */
+.bloque{margin-top:30px;border:0;padding:0;min-width:0}
+.pregunta{
+  font-size:18px; font-weight:600; line-height:1.35; margin:0;
+  padding:0; text-wrap:balance; color:var(--texto);
+}
+.ayuda{font-size:14px;color:var(--tenue);margin:5px 0 0}
+.opciones{display:flex;flex-direction:column;gap:2px;margin-top:12px}
+label.opcion{
+  display:flex; align-items:flex-start; gap:11px;
+  padding:11px 12px; border-radius:7px; cursor:pointer;
+  transition:background .12s ease; min-height:44px;
+}
+label.opcion:hover{background:var(--tarjeta)}
+label.opcion input{
+  accent-color:var(--acento); margin:3px 0 0; flex:0 0 auto;
+  width:19px; height:19px; cursor:pointer;
+}
+label.opcion span{flex:1}
+textarea,input.texto{
+  width:100%; margin-top:12px; background:var(--tarjeta); color:var(--texto);
+  border:1px solid var(--borde); border-radius:7px; padding:11px 13px;
+  font-family:inherit; font-size:16px; line-height:1.55;
+}
+textarea{min-height:88px;resize:vertical}
+textarea::placeholder,input.texto::placeholder{color:var(--tenue)}
+
+/* ---------- Matriz de 5 puntos ---------- */
+.matriz{margin-top:16px;display:flex;flex-direction:column}
+.fila{border:0;border-top:1px solid var(--borde);padding:14px 0;margin:0;min-width:0}
+.fila:first-of-type{border-top:0;padding-top:6px}
+/* La `legend` se saca de su hueco en el borde con `float`: si no, el filete
+   de separacion se corta por detras del texto. */
+.fila legend{
+  float:left; width:100%; padding:0; margin:0 0 10px;
+  font-size:15.5px; font-weight:500; line-height:1.35; color:var(--texto);
+}
+.rejilla{clear:both}
+.rejilla{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;clear:both}
+label.celda{
+  display:flex; flex-direction:column; align-items:center; gap:7px;
+  padding:9px 2px; border-radius:7px; cursor:pointer; text-align:center;
+  transition:background .12s ease; min-height:44px;
+}
+label.celda:hover{background:var(--tarjeta)}
+label.celda input{accent-color:var(--acento);width:20px;height:20px;margin:0;cursor:pointer}
+label.celda span{font-size:11.5px;line-height:1.2;color:var(--tenue);hyphens:auto}
+
+/* ---------- Solo para lectores de pantalla ---------- */
+.oculto-visual,.trampa{
+  position:absolute!important; width:1px; height:1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;
+}
+
+/* ---------- Pie / envio ---------- */
+.pie{margin-top:46px;padding-top:26px;border-top:1px solid var(--borde)}
+button.enviar{
+  font-family:var(--display); font-size:24px; letter-spacing:.1em;
+  background:var(--acento); color:var(--acento-texto);
+  border:0; border-radius:8px; padding:14px 30px; cursor:pointer;
+  min-height:48px;
+}
+button.enviar:hover{filter:brightness(1.06)}
+button.enviar[disabled]{opacity:.55;cursor:progress}
+.estado{margin-top:14px;font-size:15px;line-height:1.5;min-height:1.2em}
+.estado--error{color:var(--acento);font-weight:600}
+.firma{
+  font-family:var(--display); letter-spacing:.14em; font-size:15px;
+  color:var(--tenue); margin-top:32px;
+}
+
+/* ---------- Pantalla de gracias ---------- */
+.gracias{padding:64px 0 24px;max-width:46ch}
+.gracias h2{
+  font-family:var(--display); font-weight:400; font-size:clamp(34px,8vw,46px);
+  line-height:1; letter-spacing:.02em; margin:0 0 20px;
+}
+.gracias p{margin:0 0 14px;color:var(--texto-2)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="envoltorio">
+
+  <header class="cabecera">
+    <div class="marca">
+      <img class="marca__logo" src="pdli-logo-aro-160.png" width="46" height="46"
+           alt="Perros de la Isla">
+      <div class="marca__nombre">PERROS DE LA ISLA</div>
+    </div>
+    <div class="filete" role="progressbar" aria-label="Preguntas contestadas"
+         aria-valuemin="0" aria-valuemax="14" aria-valuenow="0" id="barra">
+      <span class="filete__lleno" id="barra-llena"></span>
+    </div>
+  </header>
+
+  <!-- ══════════════ FORMULARIO ══════════════ -->
+  <main id="pantalla-form">
+
+    <h1>Ayúdanos a mejorar</h1>
+
+    <div class="entradilla">
+      <p>En algún momento trabajaste con nosotros y nos gustaría saber qué tal fue,
+         con sinceridad. Da igual si fue este año o hace cinco.</p>
+      <p>Son unos 4 minutos y es anónima: no te pedimos tu nombre ni guardamos nada
+         que te identifique. Nos sirve mucho más lo que salió mal que lo que salió
+         bien, así que no te cortes.</p>
+      <p class="matiz">Lo leemos todo y lo tenemos en cuenta para cambiar cómo
+         trabajamos.</p>
+    </div>
+
+    <form id="encuesta" novalidate>
+
+      <!-- trampa para el ruido automatico: una persona no la ve ni la tabula -->
+      <div class="trampa" aria-hidden="true">
+        <label for="tr-web">No rellenes este campo</label>
+        <input type="text" id="tr-web" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <!-- ───────── PARA SITUARNOS ───────── -->
+      <h2 class="etapa">PARA SITUARNOS</h2>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">¿Cuándo fue?</legend>
+        <div class="opciones" data-campo="cuando">
+          <label class="opcion"><input type="radio" name="cuando" value="Este año"><span>Este año</span></label>
+          <label class="opcion"><input type="radio" name="cuando" value="Hace uno o dos años"><span>Hace uno o dos años</span></label>
+          <label class="opcion"><input type="radio" name="cuando" value="Hace más de dos años"><span>Hace más de dos años</span></label>
+          <label class="opcion"><input type="radio" name="cuando" value="No lo recuerdo bien"><span>No lo recuerdo bien</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">¿Hasta dónde llegaste?</legend>
+        <div class="opciones" data-campo="hasta_donde">
+          <label class="opcion"><input type="radio" name="hasta_donde" value="Hablamos, pero no llegué a hacer ninguna clase"><span>Hablamos, pero no llegué a hacer ninguna clase</span></label>
+          <label class="opcion"><input type="radio" name="hasta_donde" value="Hice alguna clase suelta"><span>Hice alguna clase suelta</span></label>
+          <label class="opcion"><input type="radio" name="hasta_donde" value="Hice todas las clases que había contratado"><span>Hice todas las clases que había contratado</span></label>
+          <label class="opcion"><input type="radio" name="hasta_donde" value="Estuve una buena temporada con vosotros"><span>Estuve una buena temporada con vosotros</span></label>
+          <label class="opcion"><input type="radio" name="hasta_donde" value="No lo recuerdo bien"><span>No lo recuerdo bien</span></label>
+        </div>
+      </fieldset>
+
+      <!-- ───────── CÓMO NOS CONOCISTE ───────── -->
+      <h2 class="etapa">CÓMO NOS CONOCISTE</h2>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">¿Cómo llegaste hasta nosotros?</legend>
+        <div class="opciones" data-campo="origen">
+          <label class="opcion"><input type="radio" name="origen" value="Buscando en Google"><span>Buscando en Google</span></label>
+          <label class="opcion"><input type="radio" name="origen" value="Instagram o Facebook"><span>Instagram o Facebook</span></label>
+          <label class="opcion"><input type="radio" name="origen" value="Me lo recomendó alguien"><span>Me lo recomendó alguien</span></label>
+          <label class="opcion"><input type="radio" name="origen" value="Por mi veterinario"><span>Por mi veterinario</span></label>
+          <label class="opcion"><input type="radio" name="origen" value="Por una tienda, una protectora o una residencia"><span>Por una tienda, una protectora o una residencia</span></label>
+          <label class="opcion"><input type="radio" name="origen" value="Vi el coche, un cartel, o coincidimos por la calle"><span>Vi el coche, un cartel, o coincidimos por la calle</span></label>
+          <label class="opcion"><input type="radio" name="origen" value="Ya conocía al equipo de antes"><span>Ya conocía al equipo de antes</span></label>
+          <label class="opcion"><input type="radio" name="origen" value="No lo recuerdo"><span>No lo recuerdo</span></label>
+          <label class="opcion"><input type="radio" name="origen" value="Otra" id="origen-otra-op"><span>Otra</span></label>
+        </div>
+        <label class="oculto-visual" for="origen_otro">Si has marcado «otra», cuéntanos cuál</label>
+        <input class="texto" type="text" id="origen_otro" name="origen_otro" maxlength="300"
+               placeholder="Si has marcado «otra», cuéntanos cuál"
+               data-marca="origen-otra-op">
+      </fieldset>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">¿Qué te hizo elegirnos a nosotros y no a otro?</legend>
+        <p class="ayuda" id="ay-porque">Aunque sea una sola frase.</p>
+        <label class="oculto-visual" for="por_que_nosotros">¿Qué te hizo elegirnos a nosotros y no a otro?</label>
+        <textarea id="por_que_nosotros" name="por_que_nosotros" maxlength="4000" placeholder="Opcional"
+                  aria-describedby="ay-porque"></textarea>
+      </fieldset>
+
+      <!-- ───────── QUÉ BUSCABAS ───────── -->
+      <h2 class="etapa">QUÉ BUSCABAS</h2>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">¿Qué te preocupaba cuando nos escribiste?</legend>
+        <label class="oculto-visual" for="que_preocupaba">¿Qué te preocupaba cuando nos escribiste?</label>
+        <textarea id="que_preocupaba" name="que_preocupaba" maxlength="4000" placeholder="Opcional"></textarea>
+      </fieldset>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">Desde tu primer mensaje hasta la primera clase, ¿cómo fue?</legend>
+        <div class="opciones" data-campo="entrada">
+          <label class="opcion"><input type="radio" name="entrada" value="Muy fácil"><span>Muy fácil</span></label>
+          <label class="opcion"><input type="radio" name="entrada" value="Bien"><span>Bien</span></label>
+          <label class="opcion"><input type="radio" name="entrada" value="Regular"><span>Regular</span></label>
+          <label class="opcion"><input type="radio" name="entrada" value="Costó bastante"><span>Costó bastante</span></label>
+          <label class="opcion"><input type="radio" name="entrada" value="No llegué a hacer la primera clase"><span>No llegué a hacer la primera clase</span></label>
+        </div>
+      </fieldset>
+
+      <!-- ───────── LAS CLASES ───────── -->
+      <h2 class="etapa">LAS CLASES</h2>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">Pensando en las clases y en lo que trabajabais</legend>
+        <p class="ayuda">Si de alguna no te acuerdas, déjala en blanco.</p>
+        <div class="matriz" id="matriz"></div>
+      </fieldset>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">La información que te dábamos era…</legend>
+        <div class="opciones" data-campo="informacion">
+          <label class="opcion"><input type="radio" name="informacion" value="Poca"><span>Poca</span></label>
+          <label class="opcion"><input type="radio" name="informacion" value="La justa"><span>La justa</span></label>
+          <label class="opcion"><input type="radio" name="informacion" value="Demasiada de golpe"><span>Demasiada de golpe</span></label>
+          <label class="opcion"><input type="radio" name="informacion" value="No lo recuerdo"><span>No lo recuerdo</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">¿Hubo algo que no te gustara o que te chirriara?</legend>
+        <p class="ayuda" id="ay-nogusto">Esto es justo lo que más nos sirve. Puedes ser todo lo directo que quieras.</p>
+        <label class="oculto-visual" for="algo_no_gusto">¿Hubo algo que no te gustara o que te chirriara?</label>
+        <textarea id="algo_no_gusto" name="algo_no_gusto" maxlength="4000" placeholder="Opcional"
+                  aria-describedby="ay-nogusto"></textarea>
+      </fieldset>
+
+      <!-- ───────── DESPUÉS ───────── -->
+      <h2 class="etapa">DESPUÉS</h2>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">¿Por qué dejaste de venir?</legend>
+        <p class="ayuda">Marca todo lo que aplique. No pasa nada si es simplemente que ya no hacía falta.</p>
+        <div class="opciones" data-campo="motivos">
+          <label class="opcion"><input type="checkbox" name="motivos" value="Ya habíamos conseguido lo que buscaba"><span>Ya habíamos conseguido lo que buscaba</span></label>
+          <label class="opcion"><input type="checkbox" name="motivos" value="Terminé lo que tenía contratado y no llegué a retomar"><span>Terminé lo que tenía contratado y no llegué a retomar</span></label>
+          <label class="opcion"><input type="checkbox" name="motivos" value="Se me fue pasando el tiempo"><span>Se me fue pasando el tiempo</span></label>
+          <label class="opcion"><input type="checkbox" name="motivos" value="No veía suficientes avances"><span>No veía suficientes avances</span></label>
+          <label class="opcion"><input type="checkbox" name="motivos" value="Me costaba mantener el trabajo en casa"><span>Me costaba mantener el trabajo en casa</span></label>
+          <label class="opcion"><input type="checkbox" name="motivos" value="La inversión no me encajaba"><span>La inversión no me encajaba</span></label>
+          <label class="opcion"><input type="checkbox" name="motivos" value="No me sentí cómodo con la forma de trabajar"><span>No me sentí cómodo con la forma de trabajar</span></label>
+          <label class="opcion"><input type="checkbox" name="motivos" value="Encontré otra opción"><span>Encontré otra opción</span></label>
+          <label class="opcion"><input type="checkbox" name="motivos" value="Un cambio personal (mudanza, trabajo, salud, el perro ya no está…)"><span>Un cambio personal (mudanza, trabajo, salud, el perro ya no está…)</span></label>
+          <label class="opcion"><input type="checkbox" name="motivos" value="No llegué ni a empezar"><span>No llegué ni a empezar</span></label>
+          <label class="opcion"><input type="checkbox" name="motivos" value="Otra cosa" id="motivo-otra-op"><span>Otra cosa</span></label>
+        </div>
+        <label class="oculto-visual" for="motivo_otro">Si has marcado «otra cosa», cuéntanos cuál</label>
+        <input class="texto" type="text" id="motivo_otro" name="motivo_otro" maxlength="300"
+               placeholder="Si has marcado «otra cosa», cuéntanos cuál"
+               data-marca="motivo-otra-op">
+      </fieldset>
+
+      <!-- ───────── HOY ───────── -->
+      <h2 class="etapa">HOY</h2>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">Si pudieras cambiar una sola cosa de cómo trabajamos, ¿cuál sería?</legend>
+        <p class="ayuda" id="ay-cambiar">Una sola. La que más te chirriaba.</p>
+        <label class="oculto-visual" for="cambiar_una_cosa">Si pudieras cambiar una sola cosa de cómo trabajamos, ¿cuál sería?</label>
+        <textarea id="cambiar_una_cosa" name="cambiar_una_cosa" maxlength="4000" placeholder="Opcional"
+                  aria-describedby="ay-cambiar"></textarea>
+      </fieldset>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">¿Nos recomendarías a alguien con un perro parecido al tuyo?</legend>
+        <div class="opciones" data-campo="recomendaria">
+          <label class="opcion"><input type="radio" name="recomendaria" value="Seguro que sí"><span>Seguro que sí</span></label>
+          <label class="opcion"><input type="radio" name="recomendaria" value="Probablemente sí"><span>Probablemente sí</span></label>
+          <label class="opcion"><input type="radio" name="recomendaria" value="No lo sé"><span>No lo sé</span></label>
+          <label class="opcion"><input type="radio" name="recomendaria" value="Probablemente no"><span>Probablemente no</span></label>
+          <label class="opcion"><input type="radio" name="recomendaria" value="Seguro que no"><span>Seguro que no</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">¿Volverías con nosotros?</legend>
+        <div class="opciones" data-campo="volveria">
+          <label class="opcion"><input type="radio" name="volveria" value="Sí"><span>Sí</span></label>
+          <label class="opcion"><input type="radio" name="volveria" value="Depende de algo" id="volveria-depende-op"><span>Depende de algo</span></label>
+          <label class="opcion"><input type="radio" name="volveria" value="No"><span>No</span></label>
+        </div>
+        <label class="oculto-visual" for="volveria_depende">Si depende de algo, ¿de qué?</label>
+        <input class="texto" type="text" id="volveria_depende" name="volveria_depende" maxlength="1000"
+               placeholder="Si depende de algo, ¿de qué?"
+               data-marca="volveria-depende-op">
+      </fieldset>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">Si quieres que te escribamos por algo de lo que has contado, déjanos tu nombre o tu teléfono.</legend>
+        <p class="ayuda" id="ay-firma">Es opcional y no hace falta para nada más.</p>
+        <label class="oculto-visual" for="firma">Nombre o teléfono</label>
+        <input class="texto" type="text" id="firma" name="firma" maxlength="200"
+               placeholder="Nombre o teléfono (opcional)" autocomplete="off"
+               aria-describedby="ay-firma">
+      </fieldset>
+
+      <div class="pie">
+        <button class="enviar" type="submit" id="btn-enviar">ENVIAR RESPUESTAS</button>
+        <p class="estado" id="estado" role="status" aria-live="polite"></p>
+        <p class="firma">EL EQUIPO DE PERROS DE LA ISLA</p>
+      </div>
+
+    </form>
+  </main>
+
+  <!-- ══════════════ GRACIAS ══════════════ -->
+  <main class="gracias" id="pantalla-gracias" hidden tabindex="-1">
+    <h2>Gracias. De verdad.</h2>
+    <p>Nos llevamos esto y te contamos qué cambiamos.</p>
+    <p class="firma">EL EQUIPO DE PERROS DE LA ISLA</p>
+  </main>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ═══════════════════════════════════════════════════════════════
+     CONFIGURACIÓN — la completa el chat central (ver el encargo).
+     La tabla `encuesta_respuestas` ya existe; `anon` solo puede
+     INSERTAR. Por eso el insert va SIN devolver la fila: si se
+     pidiera `select`/`returning`, fallaría a propósito.
+     ═══════════════════════════════════════════════════════════════ */
+  var SUPABASE_URL = '';        // https://<proyecto>.supabase.co
+  var SUPABASE_ANON_KEY = '';   // clave publicable (anon)
+
+  /* Guarda una respuesta. Devuelve una promesa que resuelve si quedó
+     guardada y rechaza con un Error si no. `datos` ya viene limpio:
+     solo las claves que la persona contestó. */
+  function guardarRespuesta(datos) {
+    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+      return Promise.reject(new Error('La encuesta todavía no está conectada.'));
+    }
+    return fetch(SUPABASE_URL + '/rest/v1/encuesta_respuestas', {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'   // NO devolver la fila: leer está prohibido
+      },
+      body: JSON.stringify(datos)
+    }).then(function (r) {
+      if (!r.ok) {
+        return r.text().then(function (t) {
+          throw new Error('HTTP ' + r.status + ' ' + t);
+        });
+      }
+    });
+    /* Equivalente con supabase-js, si algún día se carga la librería:
+         const { error } = await supabase.from('encuesta_respuestas').insert(datos);
+         if (error) throw error;                       // .insert() a secas, sin .select() */
+  }
+
+  /* ───────── La matriz de 5 puntos, con los cinco puntos etiquetados ───────── */
+  var ESCALA = ['Nada', 'Poco', 'A medias', 'Bastante', 'Mucho'];
+  var FRASES = [
+    ['clases_entendia',   'Entendía qué estábamos haciendo y por qué'],
+    ['clases_escuchado',  'Me sentí escuchado'],
+    ['clases_aplicar',    'Podía aplicar en casa lo que trabajábamos'],
+    ['clases_cambios',    'Vi cambios en mi perro'],
+    ['clases_complicado', 'El plan me resultó complicado']   /* invertida a propósito */
+  ];
+
+  var matriz = document.getElementById('matriz');
+  FRASES.forEach(function (par) {
+    var campo = par[0], frase = par[1];
+    var fs = document.createElement('fieldset');
+    fs.className = 'fila';
+    var lg = document.createElement('legend');
+    lg.textContent = frase;
+    fs.appendChild(lg);
+    var rej = document.createElement('div');
+    rej.className = 'rejilla';
+    rej.setAttribute('data-campo', campo);
+    ESCALA.forEach(function (etiqueta, i) {
+      var lab = document.createElement('label');
+      lab.className = 'celda';
+      var inp = document.createElement('input');
+      inp.type = 'radio';
+      inp.name = campo;
+      inp.value = String(i + 1);          /* 1 = Nada … 5 = Mucho */
+      inp.setAttribute('aria-label', frase + ': ' + etiqueta);
+      var sp = document.createElement('span');
+      sp.textContent = etiqueta;
+      lab.appendChild(inp);
+      lab.appendChild(sp);
+      rej.appendChild(lab);
+    });
+    fs.appendChild(rej);
+    matriz.appendChild(fs);
+  });
+
+  var form    = document.getElementById('encuesta');
+  var boton   = document.getElementById('btn-enviar');
+  var estado  = document.getElementById('estado');
+  var barra   = document.getElementById('barra');
+  var llena   = document.getElementById('barra-llena');
+
+  /* ───────── Nada es obligatorio: un radio se puede desmarcar ─────────
+     Sin esto, quien toca sin querer una opción ya no puede dejarla en
+     blanco, y la matriz dice explícitamente que se puede. */
+  form.addEventListener('mousedown', recordar, true);
+  form.addEventListener('keydown', function (e) {
+    if (e.key === ' ' || e.key === 'Enter') recordar(e);
+  }, true);
+  function recordar(e) {
+    var t = e.target;
+    if (t && t.type === 'radio') t.dataset.estaba = t.checked ? '1' : '';
+  }
+  form.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t && t.type === 'radio' && t.dataset.estaba === '1') {
+      t.checked = false;
+      t.dataset.estaba = '';
+      avance();
+    }
+  });
+
+  /* ───────── Si escribe en un «otra», se marca la opción sola ───────── */
+  Array.prototype.forEach.call(form.querySelectorAll('[data-marca]'), function (inp) {
+    inp.addEventListener('input', function () {
+      var op = document.getElementById(inp.dataset.marca);
+      if (op && inp.value.trim() !== '' && !op.checked) {
+        op.checked = true;
+        avance();
+      }
+    });
+  });
+
+  /* ───────── Barra de avance: 14 preguntas ───────── */
+  var GRUPOS = [
+    ['cuando'], ['hasta_donde'], ['origen'], ['por_que_nosotros'],
+    ['que_preocupaba'], ['entrada'],
+    ['clases_entendia', 'clases_escuchado', 'clases_aplicar', 'clases_cambios', 'clases_complicado'],
+    ['informacion'], ['algo_no_gusto'], ['motivos'], ['cambiar_una_cosa'],
+    ['recomendaria'], ['volveria'], ['firma']
+  ];
+  function contestado(nombre) {
+    var els = form.elements[nombre];
+    if (!els) return false;
+    if (els.length === undefined) {
+      return (els.type === 'radio' || els.type === 'checkbox')
+        ? els.checked : els.value.trim() !== '';
+    }
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (el.type === 'radio' || el.type === 'checkbox') { if (el.checked) return true; }
+      else if (el.value.trim() !== '') return true;
+    }
+    return false;
+  }
+  function avance() {
+    var n = 0;
+    GRUPOS.forEach(function (g) {
+      if (g.some(contestado)) n++;
+    });
+    llena.style.width = (n / GRUPOS.length * 100) + '%';
+    barra.setAttribute('aria-valuenow', String(n));
+  }
+  form.addEventListener('change', avance);
+  form.addEventListener('input', avance);
+  avance();
+
+  /* ───────── Armar el objeto exacto que espera la tabla ───────── */
+  var TEXTOS = [
+    'cuando', 'hasta_donde', 'origen', 'origen_otro', 'por_que_nosotros',
+    'que_preocupaba', 'entrada', 'informacion', 'algo_no_gusto', 'motivo_otro',
+    'cambiar_una_cosa', 'recomendaria', 'volveria', 'volveria_depende', 'firma'
+  ];
+  var ESCALAS = ['clases_entendia', 'clases_escuchado', 'clases_aplicar',
+                 'clases_cambios', 'clases_complicado'];
+
+  function reunir() {
+    var d = {};
+    TEXTOS.forEach(function (nombre) {
+      var els = form.elements[nombre];
+      var v = '';
+      if (!els) return;
+      if (els.length === undefined) v = els.value;
+      else {
+        for (var i = 0; i < els.length; i++) {
+          if (els[i].checked) { v = els[i].value; break; }
+        }
+      }
+      v = (v || '').trim();
+      if (v !== '') d[nombre] = v;      /* nunca cadenas vacías */
+    });
+    ESCALAS.forEach(function (nombre) {
+      var els = form.elements[nombre];
+      if (!els) return;
+      for (var i = 0; i < els.length; i++) {
+        if (els[i].checked) { d[nombre] = Number(els[i].value); break; }
+      }
+    });
+    var motivos = [];
+    Array.prototype.forEach.call(form.querySelectorAll('input[name="motivos"]:checked'),
+      function (c) { motivos.push(c.value); });
+    if (motivos.length) d.motivos = motivos.slice(0, 20);
+    return d;
+  }
+
+  /* ───────── Envío ───────── */
+  var enviando = false;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (enviando) return;
+
+    /* La trampa: si viene rellena, no se envía nada y no se guarda nada.
+       Para la persona la pantalla se comporta igual. */
+    var trampa = form.elements['website'];
+    if (trampa && trampa.value.trim() !== '') { mostrarGracias(); return; }
+
+    var datos = reunir();
+    if (Object.keys(datos).length === 0) {
+      estado.className = 'estado estado--error';
+      estado.textContent = 'No has contestado nada todavía. Contesta lo que quieras y vuelve a darle.';
+      return;
+    }
+
+    enviando = true;
+    boton.disabled = true;
+    estado.className = 'estado';
+    estado.textContent = 'Enviando…';
+
+    guardarRespuesta(datos).then(function () {
+      mostrarGracias();
+    })['catch'](function (err) {
+      enviando = false;
+      boton.disabled = false;
+      boton.textContent = 'VOLVER A INTENTARLO';
+      estado.className = 'estado estado--error';
+      estado.textContent = 'No hemos podido guardar tu respuesta. Lo que has escrito sigue aquí: '
+                         + 'inténtalo otra vez en un momento.';
+      if (window.console) console.error('[encuesta]', err);
+    });
+  });
+
+  function mostrarGracias() {
+    document.getElementById('pantalla-form').hidden = true;
+    var g = document.getElementById('pantalla-gracias');
+    g.hidden = false;
+    llena.style.width = '100%';
+    barra.setAttribute('aria-valuenow', String(GRUPOS.length));
+    window.scrollTo(0, 0);
+    g.focus();
+  }
+})();
+</script>
+</body>
+</html>
