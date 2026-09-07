@@ -26,7 +26,9 @@
 :root {
   --rojo:   #D91B1D;
   --rojo-h: #B41618;   /* hover */
-  --rojo-l: #ff8060;   /* link sobre oscuro */
+  --rojo-l: #F5EFE0;   /* enlace sobre oscuro: crema. El rojo de marca sobre #1A1A1A
+                          da 3,42:1 y no llega para texto pequeno; va como filete
+                          (PDLI_VISUAL 1). Antes habia aqui un coral fuera de paleta. */
   --oliva:  #6B7A3A;
   --oliva-l:#9CB64B;
   --negro:  #1A1A1A;
@@ -247,8 +249,8 @@ h2.display { font-size: clamp(36px,5vw,64px); line-height: .96; letter-spacing: 
 .eco-card:hover { transform: translateY(-4px); border-color: #3a3a3a; }
 .eco-card h3 { font-family: var(--display); font-weight: 400; font-size: 25px; letter-spacing: .5px; margin: 22px 0 8px; color: var(--crema); }
 .eco-card p { font-size: 14px; line-height: 1.6; color: rgba(245,239,224,.66); margin: 0; max-width: 30ch; }
-.eco-link { font-size: 14px; font-weight: 600; color: var(--rojo-l); text-decoration: none; border-bottom: 1px solid rgba(255,128,96,.35); padding-bottom: 2px; align-self: flex-start; transition: border-color .15s ease; }
-.eco-link:hover { border-color: var(--rojo-l); }
+.eco-link { font-size: 14px; font-weight: 600; color: var(--rojo-l); text-decoration: none; border-bottom: 1px solid rgba(217,27,29,.55); padding-bottom: 2px; align-self: flex-start; transition: border-color .15s ease; }
+.eco-link:hover { border-color: var(--rojo); }
 /* Marco de telefono con captura real de la app */
 .app-phone { width: 100%; max-width: 188px; margin: 0 auto; background: #0c0c0c; border-radius: 26px; padding: 7px; box-shadow: 0 16px 36px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.05); }
 .app-phone img { display: block; width: 100%; border-radius: 19px; }
@@ -273,13 +275,13 @@ h2.display { font-size: clamp(36px,5vw,64px); line-height: .96; letter-spacing: 
 .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 28px; margin-top: clamp(56px,7vw,88px); padding-top: 44px; border-top: 1px solid rgba(245,239,224,.12); }
 .contact-grid h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--rojo); margin: 0 0 12px; }
 .contact-grid .phone { font-family: var(--display); font-size: 30px; letter-spacing: 1px; color: var(--crema); text-decoration: none; transition: color .15s ease; }
-.contact-grid .phone:hover { color: var(--rojo-l); }
+.contact-grid .phone:hover { color: var(--rojo); }
 .contact-grid .wa { display: block; margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--oliva); text-decoration: none; transition: color .15s ease; }
 .contact-grid .wa:hover { color: var(--oliva-l); }
 .contact-grid .body { font-size: 15px; line-height: 1.7; color: rgba(245,239,224,.82); }
 .contact-grid a.social { display: block; font-size: 15px; font-weight: 500; color: rgba(245,239,224,.82); text-decoration: none; transition: color .15s ease; }
 .contact-grid a.social + a.social { margin-top: 8px; }
-.contact-grid a.social:hover { color: var(--rojo-l); }
+.contact-grid a.social:hover { color: var(--crema); }
 .site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; margin-top: clamp(48px,6vw,72px); padding-top: 32px; border-top: 1px solid rgba(245,239,224,.12); }
 .site-footer .fbrand { display: flex; align-items: center; gap: 14px; }
 .site-footer .fbrand b { display: block; font-family: var(--display); font-weight: 400; font-size: 22px; letter-spacing: 1.5px; color: var(--crema); line-height: 1; }
