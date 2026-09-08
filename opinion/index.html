@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ayúdanos a mejorar · Perros de la Isla</title>
-<meta name="description" content="Cuéntanos qué tal fue tu experiencia con Perros de la Isla. Anónima, unos 4 minutos.">
+<meta name="description" content="Cuéntanos qué tal fue tu experiencia con Perros de la Isla. Anónima, unos 5 minutos.">
 
 <!-- Tarjeta de enlace (WhatsApp, correo, redes). El enlace se manda por WhatsApp
      uno por uno: sin esto sale pelado y se abre bastante menos. -->
@@ -13,7 +13,7 @@
 <meta property="og:locale" content="es_ES">
 <meta property="og:url" content="https://perrosdelaisla.es/opinion/">
 <meta property="og:title" content="Ayúdanos a mejorar · Perros de la Isla">
-<meta property="og:description" content="Cuéntanos qué tal fue tu experiencia con nosotros. Anónima, unos 4 minutos.">
+<meta property="og:description" content="Cuéntanos qué tal fue tu experiencia con nosotros. Anónima, unos 5 minutos.">
 <meta property="og:image" content="https://perrosdelaisla.es/opinion/og-opinion.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -248,7 +248,7 @@ button.enviar[disabled]{opacity:.55;cursor:progress}
     <div class="entradilla">
       <p>En algún momento trabajaste con nosotros y nos gustaría saber qué tal fue,
          con sinceridad. Da igual si fue este año o hace cinco.</p>
-      <p>Son unos 4 minutos y es anónima: no te pedimos tu nombre, y solo lo sabremos
+      <p>Son unos 5 minutos y es anónima: no te pedimos tu nombre, y solo lo sabremos
          si tú decides dejarlo al final. Nos sirve mucho más lo que crees que podemos mejorar
          que lo que ya hacemos bien, así que no te cortes.</p>
       <p class="matiz">Lo leemos todo y lo tenemos en cuenta para cambiar cómo
@@ -344,6 +344,12 @@ button.enviar[disabled]{opacity:.55;cursor:progress}
         <legend class="pregunta">Pensando en las clases y en lo que trabajabais</legend>
         <p class="ayuda">Si de alguna no te acuerdas, déjala en blanco.</p>
         <div class="matriz" id="matriz"></div>
+      </fieldset>
+
+      <fieldset class="bloque">
+        <legend class="pregunta">Y sobre cómo nos organizábamos</legend>
+        <p class="ayuda">Si de algo no te acuerdas, déjalo en blanco.</p>
+        <div class="matriz" id="matriz-org"></div>
       </fieldset>
 
       <fieldset class="bloque">
@@ -492,7 +498,10 @@ button.enviar[disabled]{opacity:.55;cursor:progress}
          if (error) throw error;                       // .insert() a secas, sin .select() */
   }
 
-  /* ───────── La matriz de 5 puntos, con los cinco puntos etiquetados ───────── */
+  /* ───────── Las matrices de 5 puntos, con los cinco puntos etiquetados ─────────
+     Son dos y no comparten escala: la primera pregunta por grado (cuánto pasaba
+     algo) y la segunda por frecuencia (cada cuánto se hacía algo). Mezclarlas en
+     una sola obligaría a forzar una de las dos redacciones. */
   var ESCALA = ['Nada', 'Poco', 'A medias', 'Bastante', 'Mucho'];
   var FRASES = [
     ['clases_entendia',   'Entendía qué estábamos haciendo y por qué'],
@@ -502,8 +511,19 @@ button.enviar[disabled]{opacity:.55;cursor:progress}
     ['clases_complicado', 'El plan me resultó complicado']   /* invertida a propósito */
   ];
 
-  var matriz = document.getElementById('matriz');
-  FRASES.forEach(function (par) {
+  /* Cómo se trabajaba, no quién lo hacía: aquí no se nombra a nadie. */
+  var ESCALA_ORG = ['Nunca', 'Pocas veces', 'A veces', 'Casi siempre', 'Siempre'];
+  var FRASES_ORG = [
+    ['org_contestabais',  'Cuando os escribía, me contestabais pronto'],
+    ['org_mover_clase',   'Era fácil organizar o mover una clase'],
+    ['org_puntualidad',   'Las clases empezaban a la hora'],
+    ['org_aviso_cambios', 'Si algo se retrasaba o cambiaba, me avisabais con tiempo'],
+    ['org_tiempo',        'Me dedicabais el tiempo que hacía falta, sin prisas']
+  ];
+
+  function pintarMatriz(id, escala, frases) {
+  var matriz = document.getElementById(id);
+  frases.forEach(function (par) {
     var campo = par[0], frase = par[1];
     var fs = document.createElement('fieldset');
     fs.className = 'fila';
@@ -513,13 +533,13 @@ button.enviar[disabled]{opacity:.55;cursor:progress}
     var rej = document.createElement('div');
     rej.className = 'rejilla';
     rej.setAttribute('data-campo', campo);
-    ESCALA.forEach(function (etiqueta, i) {
+    escala.forEach(function (etiqueta, i) {
       var lab = document.createElement('label');
       lab.className = 'celda';
       var inp = document.createElement('input');
       inp.type = 'radio';
       inp.name = campo;
-      inp.value = String(i + 1);          /* 1 = Nada … 5 = Mucho */
+      inp.value = String(i + 1);          /* 1 = el extremo bajo … 5 = el alto */
       inp.setAttribute('aria-label', frase + ': ' + etiqueta);
       var sp = document.createElement('span');
       sp.textContent = etiqueta;
@@ -530,6 +550,9 @@ button.enviar[disabled]{opacity:.55;cursor:progress}
     fs.appendChild(rej);
     matriz.appendChild(fs);
   });
+  }
+  pintarMatriz('matriz',     ESCALA,     FRASES);
+  pintarMatriz('matriz-org', ESCALA_ORG, FRASES_ORG);
 
   var form    = document.getElementById('encuesta');
   var boton   = document.getElementById('btn-enviar');
@@ -568,11 +591,12 @@ button.enviar[disabled]{opacity:.55;cursor:progress}
     });
   });
 
-  /* ───────── Barra de avance: 14 preguntas ───────── */
+  /* ───────── Barra de avance: 15 preguntas ───────── */
   var GRUPOS = [
     ['cuando'], ['hasta_donde'], ['origen'], ['por_que_nosotros'],
     ['que_preocupaba'], ['entrada'],
     ['clases_entendia', 'clases_escuchado', 'clases_aplicar', 'clases_cambios', 'clases_complicado'],
+    ['org_contestabais', 'org_mover_clase', 'org_puntualidad', 'org_aviso_cambios', 'org_tiempo'],
     ['informacion'], ['algo_no_gusto'], ['motivos'], ['cambiar_una_cosa'],
     ['recomendaria'], ['volveria'], ['firma']
   ];
@@ -609,7 +633,9 @@ button.enviar[disabled]{opacity:.55;cursor:progress}
     'cambiar_una_cosa', 'recomendaria', 'volveria', 'volveria_depende', 'firma'
   ];
   var ESCALAS = ['clases_entendia', 'clases_escuchado', 'clases_aplicar',
-                 'clases_cambios', 'clases_complicado'];
+                 'clases_cambios', 'clases_complicado',
+                 'org_contestabais', 'org_mover_clase', 'org_puntualidad',
+                 'org_aviso_cambios', 'org_tiempo'];
 
   function reunir() {
     var d = {};
