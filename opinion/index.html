@@ -19,7 +19,12 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Ayúdanos a mejorar — Perros de la Isla">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="robots" content="noindex, nofollow">
+<!-- Fuera de los buscadores, pero SIN bloquear al rastreador de WhatsApp.
+     Un <meta name="robots" content="noindex"> generico se lo aplica tambien
+     facebookexternalhit, que es quien monta la vista previa, y el enlace sale
+     pelado. Por eso el noindex va dirigido a los buscadores por nombre. -->
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
 <meta name="theme-color" content="#F5EFE0" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#141312" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="pdli-logo-aro-160.png">
