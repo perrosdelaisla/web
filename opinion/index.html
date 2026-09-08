@@ -400,6 +400,15 @@ button.enviar[disabled]{opacity:.55;cursor:progress}
                data-marca="motivo-otra-op">
       </fieldset>
 
+      <fieldset class="bloque">
+        <legend class="pregunta">¿Qué habría hecho falta para que siguieras?</legend>
+        <p class="ayuda" id="ay-seguir">Aunque sea una idea suelta. Y si no hacía falta nada
+           más, dilo también.</p>
+        <label class="oculto-visual" for="que_falta_para_seguir">¿Qué habría hecho falta para que siguieras?</label>
+        <textarea id="que_falta_para_seguir" name="que_falta_para_seguir" maxlength="4000"
+                  placeholder="Opcional" aria-describedby="ay-seguir"></textarea>
+      </fieldset>
+
       <!-- ───────── HOY ───────── -->
       <h2 class="etapa">HOY</h2>
 
@@ -596,13 +605,14 @@ button.enviar[disabled]{opacity:.55;cursor:progress}
     });
   });
 
-  /* ───────── Barra de avance: 15 preguntas ───────── */
+  /* ───────── Barra de avance: 16 preguntas ───────── */
   var GRUPOS = [
     ['cuando'], ['hasta_donde'], ['origen'], ['por_que_nosotros'],
     ['que_preocupaba'], ['entrada'],
     ['clases_entendia', 'clases_escuchado', 'clases_aplicar', 'clases_cambios', 'clases_complicado'],
     ['org_contestabais', 'org_mover_clase', 'org_puntualidad', 'org_aviso_cambios', 'org_tiempo'],
-    ['informacion'], ['algo_no_gusto'], ['motivos'], ['cambiar_una_cosa'],
+    ['informacion'], ['algo_no_gusto'], ['motivos'], ['que_falta_para_seguir'],
+    ['cambiar_una_cosa'],
     ['recomendaria'], ['volveria'], ['firma']
   ];
   function contestado(nombre) {
@@ -635,7 +645,8 @@ button.enviar[disabled]{opacity:.55;cursor:progress}
   var TEXTOS = [
     'cuando', 'hasta_donde', 'origen', 'origen_otro', 'por_que_nosotros',
     'que_preocupaba', 'entrada', 'informacion', 'algo_no_gusto', 'motivo_otro',
-    'cambiar_una_cosa', 'recomendaria', 'volveria', 'volveria_depende', 'firma'
+    'que_falta_para_seguir', 'cambiar_una_cosa', 'recomendaria', 'volveria',
+    'volveria_depende', 'firma'
   ];
   var ESCALAS = ['clases_entendia', 'clases_escuchado', 'clases_aplicar',
                  'clases_cambios', 'clases_complicado',
